@@ -1,0 +1,57 @@
+\documentclass{byuthesis}
+\usepackage{blindtext}
+
+% set up title page
+\title{Exceptional Engineering Research That Has Taken Longer \\ Than Everyone Thought It Would}
+\customtitle{Exceptional Engineering Research \\ That Has Taken Longer Than \\ Everyone Thought It Would}
+\author{Emma J. Student}
+\date{April 2021}
+
+\department{Electrical and Computer Engineering}
+\institution[BYU]{Brigham Young University}
+\degree{Doctor of Philosophy}
+
+\committeechair{Norman D. Smith}
+\committeemember{Mary Q. Scott}
+\committeemember{Steven R. Jones}
+\committeemember{Anna B. Hanna}
+
+\keywords{awesome stuff, killer app, buzz words}
+
+\begin{document}
+	
+	\frontmatter
+	\titlepage
+	\clearpage
+	\customtitlepage
+	\clearpage
+	\input{abstract}
+	\clearpage
+	\input{acknowledgments}
+	\clearpage
+%	{%\hypersetup{linkcolor=black}
+		\tableofcontents*
+		\clearpage
+		\listoffigures
+		\clearpage
+		\listoftables
+		\clearpage
+		\input{nomeclature}
+		\clearpage
+%	}
+	%\makefrontmatter
+	
+	\mainmatter
+	\include{chap1}
+	\include{chap2}
+	\include{chap3}
+	\include{chap4}
+	
+	\bibliographystyle{IEEEtran}
+	\bibliography{references}
+	
+	\appendix
+	\include{appenA}
+	\include{appenB}
+	
+\end{document}

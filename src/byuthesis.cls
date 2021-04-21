@@ -276,8 +276,16 @@
 \def\@shortinstitution{\relax}
 \newcommand{\institution}[2][]{\gdef\@shortinstitution{\ifstrempty{#1}{#2}{#1}} \gdef\@institution{#2}}
 
+\institution{Brigham Young University}
+
 \def\@degree{\relax}
 \newcommand{\degree}[1]{\gdef\@degree{#1}}
+
+\if@phd
+	\degree{Doctor of Philosophy}
+\else
+	\degree{Masters of Science}
+\fi
 
 \newcommand*{\@committeelist}{}
 \newcommand*{\committeemember}[1]{\listadd{\@committeelist}{#1}}

@@ -1,64 +1,139 @@
-\documentclass{byuthesisfancy}
-\usepackage{blindtext}
+\documentclass[fancy,phd]{byuthesis}
+% Leave options blank for defaults.
+% Defaults are simple for document style, and msters for degree type.
 
-% set up title page
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Custom Options and Packages %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Define Figure Location
+\graphicspath{{figures/}}
+
+\usepackage{blindtext} %Just for using lipsum stuff in examples
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Define Title Page Elements %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% You must manually add the line breaks in the title to conform to univeristy standards (see README.md for guidelines)
 \title{Exceptional Engineering Research That Has Taken Longer \\ Than Everyone Thought It Would}
+
+% On the custom title page (not needing to conform to university standards), you may format the title as you would like.
 \customtitle{Exceptional Engineering Research \\ That Has Taken Longer Than \\ Everyone Thought It Would}
+
+% Your name goes here:
 \author{Emma J. Student}
+
+% This is the date of 
 \date{April 2021}
 
-\department{Electrical and Computer Engineering}
-\institution[BYU]{Brigham Young University}
-\degree{Doctor of Philosophy}
 
+% If your degree is not a PhD or MS, then you can overwrite the degree using the \degree command.
+%\degree{Bachelors of Basics}
+
+
+% Your department
+\department{Mechanical Engineering}
+
+% The names of your committe members (make sure to put down their names as they would like them presented).
 \committeechair{Norman D. Smith}
 \committeemember{Mary Q. Scott}
 \committeemember{Steven R. Jones}
 \committeemember{Anna B. Hanna}
 
+
+% Include any keywords you would like for your thesis/dissertation
 \keywords{awesome stuff, killer app, buzz words}
 
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+% --- Begin Document --- %
+%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{document}
-	
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% --- Front Matter (Probably Don't Need to Touch)--- %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\frontmatter
+
 	\titlepage
 	\clearpage
+
 	\customtitlepage
 	\clearpage
+
 	\input{abstract}
 	\clearpage
+
 	\input{acknowledgments}
 	\clearpage
-%	{%\hypersetup{linkcolor=black}
-		\tableofcontents*
-		\clearpage
-		\listoffigures
-		\clearpage
-		\listoftables
-		\clearpage
-		\input{nomeclature}
-		\clearpage
-%	}
-	%\makefrontmatter
-	
+
+
+	\tableofcontents*
+	\clearpage
+
+	\listoffigures
+	\clearpage
+
+	\listoftables
+	\clearpage
+
+	\input{nomeclature}
+	\clearpage
+
+
+
+%%%%%%%%%%%%%%%%%%%%%
+% --- Main Body --- %
+%%%%%%%%%%%%%%%%%%%%%
 	\mainmatter
-	\include{chap1}
-	\include{chap2}
-	\include{chap3}
-	\include{chap4}
-	
-	%\bibliographystyle{IEEEtran}
-	%\bibliography{references}
+
+% Here you want to include the .tex files where you have your chapter content.  You can name the files whatever you want, but make sure that what you call them here matches what you name them.
+
+% Fancy Version
+	\include{fancychapters/chap1}
+	\include{fancychapters/chap2}
+	\include{fancychapters/chap3}
+	\include{fancychapters/chap4}
+
+% Simple Version
+%	\include{simplechapters/chap1}
+%	\include{simplechapters/chap2}
+%	\include{simplechapters/chap3}
+%	\include{simplechapters/chap4}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%
+% --- Bibliography --- %
+%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Fancy Version
 	\printbibliography
-	
-%	\begingroup
-%		\makeatletter
-%		\let\ps@plain\ps@empty
-%		\appendixpage
-%		\makeatother
-%	\endgroup
+
+% Simple Version
+%	\bibliographystyle{IEEEtran}
+%	\bibliography{references}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%
+% --- Appedices --- %
+%%%%%%%%%%%%%%%%%%%%%
 	\appendix
+
 	\include{appenA}
 	\include{appenB}
-	
+
+
+
+%%%%%%%%%%%%%%%
+% --- End --- %
+%%%%%%%%%%%%%%%
 \end{document}

@@ -313,7 +313,7 @@
 			\@author \\
 			\vspace{\fill}
 			\begin{SingleSpace}
-				A dissertation submitted to the faculty of \\
+				A \if@phd dissertation \else thesis \fi submitted to the faculty of \\
 				\@institution \\
 				in partial fulfillment of the requirements for the degree of \\
 			\end{SingleSpace}

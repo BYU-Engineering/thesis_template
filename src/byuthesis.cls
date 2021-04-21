@@ -6,6 +6,18 @@
 %		 figure out how to delete page number from Appendices page
 %		 start working on fancy version
 
+% -------- set user options -----------
+% Fancy or Simple
+\newif\if@fancy
+\DeclareOption{fancy}{\@fancytrue}
+
+% Degree Options
+%\newif\if@masters
+%\DeclareOption{masters}{\@masterstrue}
+\newif\if@phd
+\DeclareOption{phd}{\@phdtrue}
+% -------------------------------------
+
 % -------- set main options to class -------------
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{memoir}}
 \ProcessOptions\relax

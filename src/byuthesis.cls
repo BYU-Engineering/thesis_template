@@ -28,7 +28,7 @@
 % ----------- page layout -------------
 \setlrmarginsandblock{1.75in}{1.75in}{*}
 \setulmarginsandblock{1in}{*}{1}
-\checkandfixthelayout 
+\checkandfixthelayout
 % ---------------------------------------
 
 % ----------- typesetting ---------------
@@ -42,7 +42,7 @@
 %%%% Serif fonts for body text
 % mathpazo uses palatino for body text and **math** for a consistent look
 % osf option: old style font (for numbers)
-% sc option: small caps option 
+% sc option: small caps option
 %\RequirePackage[osf,sc]{mathpazo}
 \RequirePackage{mathpazo}
 
@@ -124,14 +124,14 @@
 	\setlength{\afterchapskip}{48pt}		% Sets vertical space from baseline of chapter title to baseline of following text to be 0.87 in.
 	\renewcommand*{\printchaptername}{}		% We don't print the word "Chapter"
    	\renewcommand*{\chapternamenum}{}		% No space inserted after "Chapter" and before \chapnum
-   	\renewcommand*{\chapnumfont}{\normalfont\LARGE\sffamily\itshape\colorchapnum} 
-	\renewcommand*{\chaptitlefont}{\normalfont\LARGE\sffamily\itshape\colorchaptitle} 
+   	\renewcommand*{\chapnumfont}{\normalfont\LARGE\sffamily\itshape\colorchapnum}
+	\renewcommand*{\chaptitlefont}{\normalfont\LARGE\sffamily\itshape\colorchaptitle}
 	\renewcommand*{\printchapternum}{\chapnumfont \thechapter\hsp}
-    \renewcommand*{\afterchapternum}{}		% No vertical space after "Chapter" before \chaptertitle    
+    \renewcommand*{\afterchapternum}{}		% No vertical space after "Chapter" before \chaptertitle
 }
-\renewcommand*{\colorchapnum}{\color{royal}} 
-\renewcommand*{\colorchaptitle}{\color{royal}} 
-\renewcommand*{\colorsectitle}{\color{royal}}  
+\renewcommand*{\colorchapnum}{\color{royal}}
+\renewcommand*{\colorchaptitle}{\color{royal}}
+\renewcommand*{\colorsectitle}{\color{royal}}
 
 \chapterstyle{byuchapter}
 
@@ -234,14 +234,14 @@
 \makeheadposition{byu}{flushright}{flushleft}{}{}
 
 \makepsmarks{byu}{%
-\nouppercaseheads 
-\createmark{chapter}{both}{nonumber}{}{} 
-\createmark{section}{right}{shownumber}{}{. \space} 
-\createplainmark{toc}{both}{\contentsname} 
-\createplainmark{lof}{both}{\listfigurename} 
-\createplainmark{lot}{both}{\listtablename} 
-\createplainmark{bib}{both}{\bibname} 
-\createplainmark{index}{both}{\indexname} 
+\nouppercaseheads
+\createmark{chapter}{both}{nonumber}{}{}
+\createmark{section}{right}{shownumber}{}{. \space}
+\createplainmark{toc}{both}{\contentsname}
+\createplainmark{lof}{both}{\listfigurename}
+\createplainmark{lot}{both}{\listtablename}
+\createplainmark{bib}{both}{\bibname}
+\createplainmark{index}{both}{\indexname}
 \createplainmark{glossary}{both}{\glossaryname}}
 \makeoddhead{byu}%
     {\normalfont\small\slshape\leftmark}{}{%
@@ -249,7 +249,7 @@
 \makeevenhead{byu}%
     {\normalfont\small\slshape\thepage}{}{%
     \normalfont\small\slshape\rightmark}
-   
+
 \pagestyle{byu}
 \appto\mainmatter{\pagestyle{byu}}
 
@@ -385,7 +385,7 @@
 	\par
 	\vspace{\fill}
 	\noindent
-	Keywords: \@keywords 
+	Keywords: \@keywords
 }
 % ----------------------------------------
 
@@ -404,4 +404,93 @@
 % ----------------------------------------
 
 
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% --- ADD FANCY OPTIONS --- %%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\if@fancy
+
+% ----------- page layout -------------
+% change the page layout to allow margin notes
+\setlrmarginsandblock{1.0in}{2.75in}{*}
+\setulmarginsandblock{1in}{*}{1}
+\checkandfixthelayout
+% ---------------------------------------
+
+% ------------- marginnotes -------------
+% for notes in the margin, define separation from the textblock, max note width and min vertical distance between notes
+\setmarginnotes{0.125in}{2.0in}{\onelineskip}
+% ---------------------------------------
+
+% -------------- chapter ----------------
+% Revise the chapter style to create a fancier heading
+\newcommand{\mhsp}{\hspace{10pt}}
+\makechapterstyle{byuchapter}{%
+	\setlength{\beforechapskip}{54pt}
+	\setlength{\afterchapskip}{48pt}
+	\renewcommand*{\chapnamefont}{\normalfont\LARGE\itshape}
+	\renewcommand*{\chapnumfont}{\normalfont\LARGE\sffamily\itshape\colorchapnum}
+	\renewcommand*{\chaptitlefont}{\normalfont\LARGE\sffamily\itshape\colorchaptitle}
+	\renewcommand*{\afterchapternum}{}
+	\renewcommand*{\printchaptername}{}
+	\setlength{\midchapskip}{15mm}
+	\renewcommand*{\chapternamenum}{}
+	\renewcommand*{\printchapternum}{%
+		\sidebar{\raisebox{-76pt}[0pt][0pt]{\makebox[0pt][l]{%
+					\resizebox{!}{\midchapskip}{\mhsp\chapnumfont\thechapter}}}}}
+	\renewcommand*{\printchaptertitle}[1]{\chaptitlefont ##1}
+	\renewcommand*{\afterchaptertitle}%
+	{\vskip\afterchapskip}
+}
+\chapterstyle{byuchapter}
+% ---------------------------------------
+
+% ------------- footnotes ----------------
+% we place footnotes in the side margin and typeset them using the parameters associated with \footnotes
+% \sidefootnotes are treated separately
+%\renewcommand{\@makefntext}[1]{\makefootmark\raggedright #1}. % allow footnotes to be ragged right
+%\renewcommand*{\thefootnote}{\fnsymbol{footnote}}	% use symbols to denote footnotes
+\newcommand{\shsp}{\hspace{4pt}}
+\footmarkstyle{\color{royal}#1\shsp}
+\renewcommand{\foottextfont}{\scriptsize\color{mediumgray}}			% slightly smaller fontsize since we are placing footnotes in margin
+\setlength{\footmarkwidth}{0em} 					% space allocated for the width of the mark
+\setlength{\footmarksep}{0em}						% space between the mark and the following text
+\setlength{\footparindent}{1em}						% paragraph indent for a multi-paragraph footnote
+\counterwithout{footnote}{chapter}					% do not restart footnote numbering with each chapter'
+\footnotesinmargin									% put footnotes in the side margin
+% ---------------------------------------
+
+% ------------- sidenotes ---------------
+% create a new footnote series for sidenotes
+\newcounter{snote}[chapter]
+\newcommand\sidenote[1]{\stepcounter{snote}\textsuperscript{%
+		\fnsymbol{snote}}\marginpar{\scriptsize\textsuperscript{%
+			\scriptsize\fnsymbol{snote}}#1}}
+% ---------------------------------------
+
+% -------- figures ------------
+\RequirePackage{graphicx}
+\sidecapmargin{right} %this puts the sidecaptions in the right margin
+\setsidecappos{b} %this aligns the side caption with the bottom of the figure
+\setsidecaps{0.125in}{2.0in} %this controls the spacing from the edge of the text, and then the width of the box the caption sits in.
+%this makes the name of the caption (e.g. Figure 1) bold, small, and blue (the number and word are controlled with separate commands)
+%
+\captionnamefont{\bfseries\footnotesize\color{royal}}
+\captiontitlefont{\footnotesize}
+% ------------------------------
+
+\usepackage[citestyle=verbose-ibid,maxcitenames=1,giveninits=true,bibstyle=numeric,sorting=none]{biblatex}
+\DeclareFieldFormat{labelnumberwidth}{\color{primary}#1}%
+\setlength{\biblabelsep}{8pt}%
+\renewbibmacro{in:}{}
+
+\bibliography{references}
+
+% ---------- for testing ---------------
+\newcommand{\myshorttext}{{\color{mediumgray} Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Etiam lobortis facilisis sem. Nullam nec mi et neque pharetra sollicitudin. Praesent imperdiet mi nec ante. Donec ullamcorper, felis non sodales commodo, lectus velit ultrices augue, a dignissim nibh lectus placerat pede. Vivamus nunc nunc, molestie ut, ultricies vel, semper in, velit.}}
+% -------------------------------------
+
+\fi
 

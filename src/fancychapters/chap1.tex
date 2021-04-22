@@ -16,7 +16,7 @@ The syntax above provides an example for declaring a subsection. This subsection
 
 \begin{figure}[htbp]
 	\centering
-	\includegraphics[width=3.0in]{figures/gradf_half_space}
+	\includegraphics[width=3.0in]{gradf_half_space}
 	\caption{This is a regular figure with a centered bottom caption.}
 	\label{fig:gradf_half_space}
 \end{figure}
@@ -25,7 +25,7 @@ The syntax above provides an example for declaring a subsection. This subsection
 
 With the {\ttfamily byuthesis.cls} document class, we can have small figures that are set in the sidemargin. Figure~\ref{fig:brach} is an example of a margin figure.
 \begin{marginfigure}
-	\includegraphics[width=1.8in]{figures/brachistochrone}
+	\includegraphics[width=1.8in]{brachistochrone}
 	\caption{This is an example of a margin figure.}
 	\label{fig:brach}
 \end{marginfigure}
@@ -36,7 +36,7 @@ We can also create figures that place the caption in the side margin. This is a 
 \begin{figure}[htbp]
 	\begin{sidecaption}{This is a figure with a side caption that is not short, but not that long either.}[fig:sidecap]
 		\centering
-		\includegraphics[width=3.5in]{figures/gradf_half_space}
+		\includegraphics[width=3.5in]{gradf_half_space}
 	\end{sidecaption}
 \end{figure}
 
@@ -45,7 +45,7 @@ Finally, we can create a figure that spans the width of the text column and the 
 \begin{figure}
 	\setlength{\sidecapraise}{-1.3cm}   % manual adjustment of figure caption position
 	\begin{sidecaption}{The caption for a full-width figure appears in the margin below it.}[fig:fullwidth] %Such figures utilize the side margin.}
-		\includegraphics[width=1.35\textwidth]{figures/altitude-pitch-all}
+		\includegraphics[width=1.35\textwidth]{altitude-pitch-all}
 	\end{sidecaption}
 	\vskip -1.7cm     % manual adjustment of position of main text below figure   
 \end{figure}

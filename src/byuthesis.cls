@@ -2,16 +2,14 @@
 \ProvidesClass{byuthesis}
 % Written by Tim McLain and Andrew Ning. September 2020.
 
-% TO DO: add optional nomenclature page
-%		 figure out how to delete page number from Appendices page
-%		 start working on fancy version
-
 % -------- set user options -----------
-% Fancy or Simple
+% Format options: fancy or simple (simple is default)
+%\newif\if@simple
+%\DeclareOption{simple}{\@simpletrue}
 \newif\if@fancy
 \DeclareOption{fancy}{\@fancytrue}
 
-% Degree Options
+% Degree options: masters or phd (masters is default)
 %\newif\if@masters
 %\DeclareOption{masters}{\@masterstrue}
 \newif\if@phd
@@ -253,13 +251,22 @@
 \pagestyle{byu}
 \appto\mainmatter{\pagestyle{byu}}
 
-% ----------- hyperlinks -----------
+% -------------- hyperlinks -------------
 %\RequirePackage[colorlinks,bookmarks,bookmarksnumbered,allcolors=royal,breaklinks]{hyperref}  % make hyperlinks royal
 \RequirePackage[colorlinks,bookmarks,bookmarksnumbered,allcolors=black,breaklinks]{hyperref}	   % make hyperlinks black
 % ---------------------------------------
 
 % ---------- cross referencing ------------
 \RequirePackage[capitalise]{cleveref}
+% ---------------------------------------
+
+% ----------- bibliography --------------
+\if@fancy
+	% do nothing for fancy here, see fancy options below
+\else
+	\usepackage[style=ieee]{biblatex}
+	\bibliography{references}
+\fi
 % ---------------------------------------
 
 % ----------- user input --------------
@@ -481,12 +488,14 @@
 \captiontitlefont{\footnotesize}
 % ------------------------------
 
-\usepackage[citestyle=verbose-ibid,maxcitenames=1,giveninits=true,bibstyle=numeric,sorting=none]{biblatex}
+% ----------- bibliography --------------
+\usepackage[citestyle=verbose-ibid,maxcitenames=1,mincitenames=1,giveninits=true,bibstyle=ieee,sorting=none]{biblatex}
 \DeclareFieldFormat{labelnumberwidth}{\color{primary}#1}%
 \setlength{\biblabelsep}{8pt}%
 \renewbibmacro{in:}{}
 
 \bibliography{references}
+% ---------------------------------------
 
 % ---------- for testing ---------------
 \newcommand{\myshorttext}{{\color{mediumgray} Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Etiam lobortis facilisis sem. Nullam nec mi et neque pharetra sollicitudin. Praesent imperdiet mi nec ante. Donec ullamcorper, felis non sodales commodo, lectus velit ultrices augue, a dignissim nibh lectus placerat pede. Vivamus nunc nunc, molestie ut, ultricies vel, semper in, velit.}}

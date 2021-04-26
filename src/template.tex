@@ -1,4 +1,5 @@
 \documentclass[fancy,phd]{byuthesis}
+% Class options are simple/fancy and masters/phd.
 % Leave options blank for defaults.
 % Defaults are simple for document style, and masters for degree type.
 
@@ -36,7 +37,7 @@
 
 
 % Your department
-\department{Mechanical Engineering}
+\department{Electrical and Computer Engineering}
 
 % The names of your committee members (make sure to put down their names as they would like them presented).
 \committeechair{Norman D. Smith}
@@ -94,7 +95,11 @@
 %%%%%%%%%%%%%%%%%%%%%
 	\mainmatter
 
-% Here you want to include the .tex files where you have your chapter content.  You can name the files whatever you want, but make sure that what you call them here matches what you name them.
+% Here you want to include the .tex files where you have your chapter content.  You can name the files 
+% whatever you want, but make sure that what you call them here matches what you name them.
+%
+% Note that the chapter .tex files for the simple template and fancy template are different because fancy
+% template has commands and features not available in the simple template. 
 
 % Fancy Version
 	\include{fancychapters/chap1}
@@ -113,13 +118,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%
 % --- Bibliography --- %
 %%%%%%%%%%%%%%%%%%%%%%%%
-
-% Fancy Version
 	\printbibliography
-
-% Simple Version
-%	\bibliographystyle{IEEEtran}
-%	\bibliography{references}
 
 
 

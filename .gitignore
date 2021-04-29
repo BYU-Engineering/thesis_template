@@ -276,3 +276,4 @@ TSWLatexianTemp*
 *.lpz
 src/template.pdf
 src/.DS_Store
+.DS_Store

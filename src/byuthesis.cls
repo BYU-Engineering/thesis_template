@@ -264,7 +264,7 @@
 \if@fancy
 	% do nothing for fancy here, see fancy options below
 \else
-	\usepackage[style=ieee]{biblatex}
+	\usepackage[backend=biber,style=ieee]{biblatex}
 	\bibliography{references}
 \fi
 % ---------------------------------------
@@ -489,7 +489,7 @@
 % ------------------------------
 
 % ----------- bibliography --------------
-\usepackage[citestyle=verbose-ibid,maxcitenames=1,mincitenames=1,giveninits=true,bibstyle=ieee,sorting=none]{biblatex}
+\usepackage[citestyle=verbose-ibid,maxcitenames=1,mincitenames=1,giveninits=true,backend=biber,bibstyle=ieee,sorting=none]{biblatex}
 \DeclareFieldFormat{labelnumberwidth}{\color{primary}#1}%
 \setlength{\biblabelsep}{8pt}%
 \renewbibmacro{in:}{}

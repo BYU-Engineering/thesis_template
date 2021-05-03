@@ -262,10 +262,9 @@
 
 % ----------- bibliography --------------
 \if@fancy
-	% do nothing for fancy here, see fancy options below
+	% do nothing for fancy style here, see fancy style options below
 \else
 	\usepackage[backend=biber,style=ieee]{biblatex}
-	\bibliography{references}
 \fi
 % ---------------------------------------
 
@@ -493,8 +492,6 @@
 \DeclareFieldFormat{labelnumberwidth}{\color{primary}#1}%
 \setlength{\biblabelsep}{8pt}%
 \renewbibmacro{in:}{}
-
-\bibliography{references}
 % ---------------------------------------
 
 % ---------- for testing ---------------

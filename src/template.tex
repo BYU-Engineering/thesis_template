@@ -6,48 +6,54 @@
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Custom Options and Packages %
+% Custom options and packages %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Define Figure Location
+% Define path to figure files
 \graphicspath{{figures/}}
 
-\usepackage{blindtext} %Just for using lipsum stuff in examples
+% Define sequences of Latin text to fill space in example documents
+% (not needed for your thesis -- delete or comment out if you'd like)
+\usepackage{blindtext} 
 
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Define Title Page Elements %
+% Define title page elements %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-% You must manually add the line breaks in the title to conform to university standards (see README.md for guidelines)
+% Thesis title for required BYU title page
 \title{Exceptional Engineering Research That Has Taken Longer \\ Than Everyone Thought It Would}
 
-% On the custom title page (not needing to conform to university standards), you may format the title as you would like.
+% On the custom title page, use the same title, but format as you like
 \customtitle{Exceptional Engineering Research \\ That Has Taken Longer Than \\ Everyone Thought It Would}
 
 % Your name goes here:
 \author{Emma J. Student}
 
-% This is the date of 
+% This is the date of graduation
 \date{April 2021}
 
-
-% If your degree is not a PhD or MS, then you can overwrite the degree using the \degree command.
+% If your degree is not a PhD or MS, then you can overwrite the degree using the \degree command
 %\degree{Bachelors of Basics}
-
 
 % Your department
 \department{Electrical and Computer Engineering}
 
-% The names of your committee members (make sure to put down their names as they would like them presented).
+% The names of your committee members
 \committeechair{Norman D. Smith}
 \committeemember{Mary Q. Scott}
 \committeemember{Steven R. Jones}
 \committeemember{Anna B. Hanna}
 
-
 % Include any keywords you would like for your thesis/dissertation
 \keywords{awesome stuff, killer app, buzz words}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% ---Bibliography source file--- %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%  Default is references.bib 
+\bibliography{references}
 
 
 
@@ -58,9 +64,9 @@
 
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% --- Front Matter (Probably Don't Need to Touch)--- %
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% --- Front matter (probably don't need to change)--- %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\frontmatter
 
 	\titlepage
@@ -119,7 +125,6 @@
 % --- Bibliography --- %
 %%%%%%%%%%%%%%%%%%%%%%%%
 	\printbibliography
-
 
 
 %%%%%%%%%%%%%%%%%%%%%

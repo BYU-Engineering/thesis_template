@@ -14,6 +14,7 @@
 % ----------------------------------------------
 
 % ----------- page layout -------------
+\RequirePackage{geometry}
 \setlrmarginsandblock{1.75in}{1.75in}{*}
 \setulmarginsandblock{1in}{*}{1}
 \checkandfixthelayout 
@@ -284,6 +285,7 @@
 \newlength{\titlebottomadjust}  \setlength{\titlebottomadjust}{18pt}	% defined to tweak the length of the title page so that
 																		% last line of text is at 1 inch above page bottom
 \newcommand{\titlepage}{%
+	\newgeometry{margin=1.75in}
 	\pdfbookmark{TITLE PAGE}{titlepage}
 	\pagestyle{empty}
 	\begin{Spacing}{2.0}
@@ -313,6 +315,7 @@
 			\clearpage
 		\end{center}
 	\end{Spacing}
+	\restoregeometry
 }
 % ----------------------------------------
 

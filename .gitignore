@@ -275,5 +275,3 @@ TSWLatexianTemp*
 # Makeindex log files
 *.lpz
 src/template.pdf
-src/.DS_Store
-.DS_Store

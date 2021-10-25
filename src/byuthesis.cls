@@ -24,7 +24,6 @@
 % ----------------------------------------------
 
 % ----------- page layout -------------
-\RequirePackage{geometry}
 \setlrmarginsandblock{1.75in}{1.75in}{*}
 \setulmarginsandblock{1in}{*}{1}
 \checkandfixthelayout
@@ -311,7 +310,11 @@
 \newlength{\titlebottomadjust}  \setlength{\titlebottomadjust}{18pt}	% defined to tweak the length of the title page so that
 																		% last line of text is at 1 inch above page bottom
 \newcommand{\titlepage}{%
-	\newgeometry{margin=1.75in}
+	% for fancy style, set the page margins to be equal to center title on page
+	\if@fancy
+		\setlrmarginsandblock{1.75in}{1.75in}{*}
+		\checkandfixthelayout
+	\fi
 	\pdfbookmark{TITLE PAGE}{titlepage}
 	\pagestyle{empty}
 	\begin{Spacing}{2.0}
@@ -341,7 +344,12 @@
 			\clearpage
 		\end{center}
 	\end{Spacing}
-	\restoregeometry
+	% for fancy style, reset the page layout back for margin notes
+	\if@fancy
+		\setlrmarginsandblock{1.0in}{2.75in}{*}
+		\checkandfixthelayout
+		\setmarginnotes{0.125in}{2.0in}{\onelineskip}
+	\fi
 }
 % ----------------------------------------
 

@@ -499,10 +499,25 @@
 % ------------------------------
 
 % ----------- bibliography --------------
+% setup biblatex, specify citation and bibliography styles
 \usepackage[citestyle=verbose-ibid,maxcitenames=1,mincitenames=1,giveninits=true,backend=biber,bibstyle=ieee,sorting=none]{biblatex}
 \DeclareFieldFormat{labelnumberwidth}{\color{primary}#1}%
 \setlength{\biblabelsep}{8pt}%
 \renewbibmacro{in:}{}
+% for citations in side margin, only print author, title, and year
+% do not include the following items
+\AtEveryCitekey{%
+  \clearlist{publisher}%
+  \clearfield{edition}%
+  \clearfield{type}%
+  \clearfield{pages}%
+  \clearlist{location}%
+  \clearlist{institution}%
+  \clearfield{volume}%
+  \clearfield{number}%
+  \clearfield{journaltitle}%
+  \clearfield{booktitle}%
+}
 % ---------------------------------------
 
 % ---------- for testing ---------------

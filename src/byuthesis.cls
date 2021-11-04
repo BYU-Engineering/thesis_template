@@ -2,7 +2,10 @@
 \ProvidesClass{byuthesis}
 % Written by Tim McLain and Andrew Ning. September 2020.
 
-% -------- set user options -----------
+% -------- set user options for byuthesis class -----------
+% Options are declared by user when specifying the document class such as in the template.tex file
+% For example, \documentclass[fancy,phd]{byuthesis}
+%.          or \documentclass[simple,masters]{byuthesis}
 % Format options: fancy or simple (simple is default)
 %\newif\if@simple
 %\DeclareOption{simple}{\@simpletrue}
@@ -212,28 +215,27 @@
 \captiontitlefont{\normalfont\small}
 % ----------------------------------------
 
-%%%--------- header ----------
-%\nouppercaseheads
-%\copypagestyle{byu}{headings}
-%\aliaspagestyle{chapter}{empty}
-%\pagestyle{byu}
-%%\appto\frontmatter{\pagestyle{byu}}
-%\appto\mainmatter{\pagestyle{byu}}
-%% ----------------------------------------
+%---------------- header and footer -----------------
+%\setlength{\headwidth}{\textwidth}
 
-\setlength{\headwidth}{\textwidth}
-%   \addtolength{\headwidth}{\marginparsep}
-%   \addtolength{\headwidth}{\marginparwidth}
+% create page style for opening pages of chapter that puts
+% page number in the lower right corner of the page
+\makepagestyle{byuchaptertitle}
+\makeoddfoot{byuchaptertitle}{}{\normalfont\small\slshape\thepage}{}
+\makeevenfoot{byuchaptertitle}{}{\normalfont\small\slshape\thepage}{}
+\makerunningwidth{byuchaptertitle}[\textwidth]{\textwidth}
+\makeheadposition{byuchaptertitle}{flushright}{flushleft}{flushright}{flushleft}
 
+% create headers and footers
 \makepagestyle{byu}
-\aliaspagestyle{chapter}{empty}
-\makerunningwidth{byu}{\headwidth}
-%\makeheadrule{mycompanion}{\headwidth}{\normalrulethickness}
-\makeheadposition{byu}{flushright}{flushleft}{}{}
+\aliaspagestyle{chapter}{byuchaptertitle}
+\makerunningwidth{byu}[\textwidth]{\textwidth}
+\makeheadposition{byu}{flushright}{flushleft}{flushright}{flushleft}
 
 \makepsmarks{byu}{%
 \nouppercaseheads
-\createmark{chapter}{both}{nonumber}{}{}
+%\createmark{chapter}{both}{nonumber}{}{}
+\createmark{chapter}{left}{nonumber}{}{}
 \createmark{section}{right}{shownumber}{}{. \space}
 \createplainmark{toc}{both}{\contentsname}
 \createplainmark{lof}{both}{\listfigurename}
@@ -241,15 +243,40 @@
 \createplainmark{bib}{both}{\bibname}
 \createplainmark{index}{both}{\indexname}
 \createplainmark{glossary}{both}{\glossaryname}}
+
+%% One-sided printing
+% Place page number in top right corner of all pages except chapter title pages
+% Place chapter title in top left corner of all pages except chapter title pages
 \makeoddhead{byu}%
-    {\normalfont\small\slshape\leftmark}{}{%
-    \normalfont\small\slshape\thepage}
-\makeevenhead{byu}%
-    {\normalfont\small\slshape\thepage}{}{%
-    \normalfont\small\slshape\rightmark}
+	{\normalfont\small\slshape\leftmark}{}{\normalfont\small\slshape\thepage}	% include chapter title
+%    {}{}{\normalfont\small\slshape\thepage}	% don't include chapter title
+\makeoddfoot{byu}%
+    {}{}{}
+
+%%% One-sided printing
+%% Place page number in bottom right corner of all pages
+%% Place section title in top right corner of all pages except
+%% chapter title pages
+%\makeoddhead{byu}%
+%	{\normalfont\small\slshape\leftmark}{}{\normalfont\small\slshape\rightmark}	% include chapter title
+%%    {}{}{\normalfont\small\slshape\rightmark}	% don't include chapter title
+%\makeoddfoot{byu}%
+%    {}{}{\normalfont\small\slshape\thepage}
+
+%% Two-sided printing for simple format only
+%\makeoddhead{byu}%
+%    {}{}{\normalfont\small\slshape\leftmark}
+%\makeevenhead{byu}%
+%    {\normalfont\small\slshape\rightmark}{}{}
+%\makeoddfoot{byu}%
+%    {}{}{\normalfont\small\slshape\thepage}
+%\makeevenfoot{byu}%
+%    {\normalfont\small\slshape\thepage}{}{}
 
 \pagestyle{byu}
 \appto\mainmatter{\pagestyle{byu}}
+% -----------------------------------------------
+
 
 % -------------- hyperlinks -------------
 %\RequirePackage[colorlinks,bookmarks,bookmarksnumbered,allcolors=royal,breaklinks]{hyperref}  % make hyperlinks royal
@@ -419,8 +446,6 @@
 	\vspace*{24pt}  % spacing set to match chapter header spacing
 }
 % ----------------------------------------
-
-
 
 
 

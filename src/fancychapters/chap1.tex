@@ -1,7 +1,11 @@
 \chapter{Introduction}
 \label{ch:intro}
 
-The opening chapter of a thesis or dissertation will typically provide an introduction to the body of research. At the beginning of a chapter, it is common to provide some introductory text. Instead of discussing research, this template document will highlight how the {\ttfamily byuthesis.cls} and {\ttfamily byuthesisfancy.cls} \LaTeX{} classes can be used to prepare a thesis or dissertation document for submission in the College of Engineering at BYU.
+The opening chapter of a thesis or dissertation will typically provide an introduction to the body of research. At the beginning of a chapter, it is common to provide some introductory text. Instead of discussing research, this template document will highlight how the {\ttfamily byuthesis.cls} and \LaTeX{} class can be used to prepare a thesis or dissertation document for submission in the College of Engineering at BYU. 
+
+\section{Class Options}
+\label{sec:class_options}
+The {\ttfamily byuthesis} class has two class options. The first option allows the author to choose between a {\em simple} or {\em fancy} document format. The simple format is traditional and straightforward and can be implemented in standard word processor. The fancy format leverages the advanced typesetting features of \LaTeX{} and the {\ttfamily memoir} class that more effectively utilizes the full letter-size page while following typesetting best practices. With the second option, the author can specify whether the document fulfills the requirements for a masters or doctoral degree. For example, to use the {\ttfamily byuthesis} class for a doctoral dissertation in the simple format, the class definition would be \verb|\documentclass[simple,phd]{byuthesis}|. To create a masters thesis in the the fancy format, the definition would be \verb|\documentclass[fancy,masters]{byuthesis}|. The example template document ({\ttfamily template.tex}) can be compiled using any combination of these options. Note that the simple and fancy formats use different source files for the chapters in this document. Be sure to uncomment the appropriate {\ttfamily chap*.tex} files in {\ttfamily template.tex}.
 
 \section{Styles}
 \label{sec:intro_styles}
@@ -42,7 +46,7 @@ We can also create figures that place the caption in the side margin. This is a 
 
 Finally, we can create a figure that spans the width of the text column and the side margin. This option should not be used frequently as it requires some tweaking of the vertical distance of the caption and follow-on text below the figure. It will work robustly when the figure appears at the top or middle of a page, but may push the caption onto the next page when it appears at the bottom. There may be some instances with wide images where the additional manual adjusting is worth the effort.
 
-\begin{figure}
+\begin{figure}[h]
 	\setlength{\sidecapraise}{-1.3cm}   % manual adjustment of figure caption position
 	\begin{sidecaption}{The caption for a full-width figure appears in the margin below it.}[fig:fullwidth] %Such figures utilize the side margin.}
 		\includegraphics[width=1.35\textwidth]{altitude-pitch-all}
@@ -54,9 +58,9 @@ Finally, we can create a figure that spans the width of the text column and the 
 The syntax above provides an example of how to include a subsubsection. In this thesis template, the document has four primary division levels: \verb|\chapter|, \verb|\section|, \verb|\subsection|, and \verb|\subsubsection|. The command \verb|\subsubsection| is used to define the lowest level of division. Notice that subsubsection titles are not numbered.
 
 \subsubsection{Including Tables}
-Tables are also fairly straightforward to include in a \LaTeX{} document. Table~\ref{tab:table_example} shows a simple table. \LaTeX{} refers to figures and tables as floats and often tries to locate figures at the top or bottom of a page. The user has some control over this, but \LaTeX{} can behave like it has a mind of its own sometimes. In reality it is placing figures according to internal algorithms and parameters that you can adjust. If you are interested in digging into this level of detail, an internet search on ``LaTeX float parameters'' will provide ample reading.  In creating the table, we have used the command \verb|\begin{table}[hbt]|. The parameters \verb|[hbt]| allow us to specify some preference on the location of the table. In this case, first preference is given to \emph{here} -- the current location, the second preference is given to the \emph{bottom} of the page, and the third preference is given to the \emph{top} of the page.
+Tables are also fairly straightforward to include in a \LaTeX{} document. Table~\ref{tab:table_example} shows a simple table. \LaTeX{} refers to figures and tables as floats and often tries to locate figures at the top or bottom of a page. The user has some control over this, but \LaTeX{} can behave like it has a mind of its own sometimes. In reality it is placing figures according to internal algorithms and parameters that you can adjust. If you are interested in digging into this level of detail, an internet search on ``LaTeX float parameters'' will provide ample reading.  In creating the table, we have used the command \verb|\begin{table}[t]|. The parameter \verb|[t]| allow us to specify preference for the location of table to be at the \emph{top} of the page.
 
-\begin{table}[hbt]
+\begin{table}[t]
 	\centering
 	\caption{This is a standard table with a top caption.}
 	\label{tab:table_example}	\begin{tabular}{ c c c c}
@@ -65,15 +69,15 @@ Tables are also fairly straightforward to include in a \LaTeX{} document. Table~
 		name & number & minimum & maximum \\
 		\midrule
 		1B & 68.5 & 49.2 & 84.1 \\ 
-		2B & 66.2 & 46.8 & 82.7\\ 
-		3B & 65.4 & 45.5 & 82.3\\
+		2B & 66.2 & 46.8 & 82.7 \\ 
+		3B & 65.4 & 45.5 & 82.3 \\
 		\midrule
-		average & 66.7 & 47.2 & 83.0\\
+		average & 66.7 & 47.2 & 83.0 \\
 		\bottomrule
 	\end{tabular}
 \end{table}
 
-Table~\ref{tab:table_sidecaption} shows an example of the same table using a side caption. We have used the placement preferences \verb|[thb]| and you can see that \LaTeX() sometimes overrides our preferences.
+Table~\ref{tab:table_sidecaption} shows an example of the same table using a side caption. We have used the placement preferences \verb|[thb]| to give first preference to the top of the page, second preference to the current positioning in the source code (\emph{here}), and third preference to the \emph{bottom} of the page. As you can see, \LaTeX{} may override our preferences, based on the space available and its typesetting rules.
 \begin{table}[thb]
 	\begin{sidecaption}{This is a standard table with a side caption.}[tab:table_sidecaption]
 		\centering
@@ -83,10 +87,10 @@ Table~\ref{tab:table_sidecaption} shows an example of the same table using a sid
 			name & number & minimum & maximum \\
 			\midrule
 			1B & 68.5 & 49.2 & 84.1 \\ 
-			2B & 66.2 & 46.8 & 82.7\\ 
-			3B & 65.4 & 45.5 & 82.3\\
+			2B & 66.2 & 46.8 & 82.7 \\ 
+			3B & 65.4 & 45.5 & 82.3 \\
 			\midrule
-			average & 66.7 & 47.2 & 83.0\\
+			average & 66.7 & 47.2 & 83.0 \\
 			\bottomrule
 		\end{tabular}
 	\end{sidecaption}
@@ -98,7 +102,7 @@ Equation formatting is one of \LaTeX's most useful features and a good reason wh
 	\label{eq:surface_area_cyl}
 	S = 2\pi r \left( r + h \right) , 
 \end{equation}
-where $r$ is the radius of the cylinder and $h$ is its height. The area of a circle can be written in terms of its diameter $d$ as 
+where $r$ is the radius of the cylinder and $h$ is its height. The area of a circle can be expressed in terms of its diameter $d$ as 
 \begin{equation}
 	\label{eq:area_circle}
 	A = \frac{\pi}{4} d^2 .
@@ -121,5 +125,4 @@ or like this
 Just as we did with sections, figures, and tables, we can reference a specific equation by using its declared label. In~\eqref{eq:surface_area_cyl}, the surface area of a cylinder is defined. Another format would be to say Equation~\ref{eq:area_circle} defines the area of a circle. Yet another format is \cref{eq:area_circle}. Any of these formats is acceptable. Use just one of them and be consistent.
 
 \LaTeX{} can do so much with the typesetting of equations. These few examples are just a small sampling of its impressive capabilities.
-
 

@@ -67,11 +67,14 @@
 % ---------- colors -------------
 \RequirePackage{xcolor}
 \definecolor{navy}{HTML}{002E5D}
-\definecolor{royal}{HTML}{0062B8}
+%\definecolor{royal}{HTML}{003DA5}	% university brand guide definition of royal
+\definecolor{royal}{HTML}{005CAB}	% royal that matches BYU Engineering logo
+%\definecolor{royal}{HTML}{0062B8}	% royal definition from A. Ning
 \definecolor{darkgray}{HTML}{141414}
-\definecolor{mediumgray}{HTML}{666666}
+%\definecolor{mediumgray}{HTML}{7C878E}	% slate gray from university brand guide
+\definecolor{mediumgray}{HTML}{666666}	% medium gray definition from A. Ning
 \definecolor{black}{HTML}{111111}
-\definecolor{primary}{HTML}{0062B8}
+\definecolor{primary}{HTML}{005CAB}
 % -------------------------------
 
 % -------- figures ------------
@@ -279,8 +282,9 @@
 
 
 % -------------- hyperlinks -------------
-%\RequirePackage[colorlinks,bookmarks,bookmarksnumbered,allcolors=royal,breaklinks]{hyperref}  % make hyperlinks royal
-\RequirePackage[colorlinks,bookmarks,bookmarksnumbered,allcolors=black,breaklinks]{hyperref}	   % make hyperlinks black
+\RequirePackage[colorlinks,bookmarks,bookmarksnumbered,allcolors=royal,breaklinks]{hyperref}  % make hyperlinks royal
+%\RequirePackage[colorlinks,bookmarks,bookmarksnumbered,allcolors=black,breaklinks]{hyperref}	   % make hyperlinks black
+\RequirePackage[hyphenbreaks]{breakurl}
 % ---------------------------------------
 
 % ---------- cross referencing ------------

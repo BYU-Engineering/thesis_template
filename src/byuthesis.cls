@@ -130,9 +130,11 @@
    	\renewcommand*{\chapternamenum}{}		% No space inserted after "Chapter" and before \chapnum
    	\renewcommand*{\chapnumfont}{\normalfont\LARGE\sffamily\itshape\colorchapnum}
 	\renewcommand*{\chaptitlefont}{\normalfont\LARGE\sffamily\itshape\colorchaptitle}
-	\renewcommand*{\printchapternum}{\chapnumfont \thechapter\hsp}
     \renewcommand*{\afterchapternum}{}		% No vertical space after "Chapter" before \chaptertitle
-}
+%	\renewcommand*{\printchapternum}{\chapnumfont \thechapter\hsp}
+	\renewcommand*{\printchapternum}{%
+		\@hangfrom{\chapnumfont \thechapter\hsp}}%	% Aligns second line of chapter title with beginning 
+}													% of first line rather than chapter number
 \renewcommand*{\colorchapnum}{\color{royal}}
 \renewcommand*{\colorchaptitle}{\color{royal}}
 \renewcommand*{\colorsectitle}{\color{royal}}
@@ -222,12 +224,12 @@
 %\setlength{\headwidth}{\textwidth}
 
 % create page style for opening pages of chapter that puts
-% page number in the lower right corner of the page
+% page number in the lower center of the page
 \makepagestyle{byuchaptertitle}
 \makeoddfoot{byuchaptertitle}{}{\normalfont\small\slshape\thepage}{}
 \makeevenfoot{byuchaptertitle}{}{\normalfont\small\slshape\thepage}{}
-\makerunningwidth{byuchaptertitle}[\textwidth]{\textwidth}
-\makeheadposition{byuchaptertitle}{flushright}{flushleft}{flushright}{flushleft}
+%\makerunningwidth{byuchaptertitle}[\textwidth]{\textwidth}
+%\makeheadposition{byuchaptertitle}{flushright}{flushleft}{flushright}{flushleft}
 
 % create headers and footers
 \makepagestyle{byu}

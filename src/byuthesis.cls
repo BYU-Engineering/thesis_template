@@ -228,14 +228,15 @@
 \makepagestyle{byuchaptertitle}
 \makeoddfoot{byuchaptertitle}{}{\normalfont\small\slshape\thepage}{}
 \makeevenfoot{byuchaptertitle}{}{\normalfont\small\slshape\thepage}{}
-%\makerunningwidth{byuchaptertitle}[\textwidth]{\textwidth}
-%\makeheadposition{byuchaptertitle}{flushright}{flushleft}{flushright}{flushleft}
 
 % create headers and footers
 \makepagestyle{byu}
-\aliaspagestyle{chapter}{byuchaptertitle}
+%\aliaspagestyle{chapter}{byuchaptertitle}
+\aliaspagestyle{plain}{byuchaptertitle}
 \makerunningwidth{byu}[\textwidth]{\textwidth}
 \makeheadposition{byu}{flushright}{flushleft}{flushright}{flushleft}
+\preto\tableofcontents{\pagestyle{byuchaptertitle}}	% sets page numbering format in frontmatter
+
 
 \makepsmarks{byu}{%
 \nouppercaseheads
@@ -284,9 +285,8 @@
 
 
 % -------------- hyperlinks -------------
-\RequirePackage[colorlinks,bookmarks,bookmarksnumbered,allcolors=royal,breaklinks]{hyperref}  % make hyperlinks royal
-%\RequirePackage[colorlinks,bookmarks,bookmarksnumbered,allcolors=black,breaklinks]{hyperref}	   % make hyperlinks black
-\RequirePackage[hyphenbreaks]{breakurl}
+%\RequirePackage[colorlinks,bookmarks,bookmarksnumbered,allcolors=royal,breaklinks]{hyperref}  % make hyperlinks royal
+\RequirePackage[colorlinks,bookmarks,bookmarksnumbered,allcolors=black,breaklinks]{hyperref}	   % make hyperlinks black
 % ---------------------------------------
 
 % ---------- cross referencing ------------
@@ -496,6 +496,8 @@
 % ---------------------------------------
 
 % ------------- footnotes ----------------
+\RequirePackage{marginfix}							% This package fixes the issue of margin notes overflowing the page: it makes them break into the next page instead
+
 % we place footnotes in the side margin and typeset them using the parameters associated with \footnotes
 % \sidefootnotes are treated separately
 %\renewcommand{\@makefntext}[1]{\makefootmark\raggedright #1}. % allow footnotes to be ragged right

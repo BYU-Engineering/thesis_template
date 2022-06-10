@@ -285,22 +285,25 @@
 % -----------------------------------------------
 
 
-% -------------- hyperlinks -------------
-%\RequirePackage[colorlinks,bookmarks,bookmarksnumbered,allcolors=royal,breaklinks]{hyperref}  % make hyperlinks royal
-\RequirePackage[colorlinks,bookmarks,bookmarksnumbered,allcolors=black,breaklinks]{hyperref}	   % make hyperlinks black
-% ---------------------------------------
-
-% ---------- cross referencing ------------
-\RequirePackage[capitalise]{cleveref}
-% ---------------------------------------
-
-% ----------- bibliography --------------
 \if@fancy
 	% do nothing for fancy style here, see fancy style options below
 \else
+	%
+	% simple option: bibliograpny, hyperlinks, cross referencing
+	%
+	% ----------- bibliography --------------
 	\usepackage[backend=biber,style=ieee]{biblatex}
+	% ---------------------------------------
+
+	% -------------- hyperlinks -------------
+	%\RequirePackage[colorlinks,bookmarks,bookmarksnumbered,allcolors=royal,breaklinks]{hyperref}  % make hyperlinks royal
+	\RequirePackage[colorlinks,bookmarks,bookmarksnumbered,allcolors=black,breaklinks]{hyperref}	   % make hyperlinks black
+	% ---------------------------------------
+
+	% ---------- cross referencing ------------
+	\RequirePackage[capitalise]{cleveref}
+	% ---------------------------------------
 \fi
-% ---------------------------------------
 
 % ----------- user input --------------
 \def\@customtitle{\relax}
@@ -532,27 +535,167 @@
 \captiontitlefont{\footnotesize}
 % ------------------------------
 
-% ----------- bibliography --------------
-% setup biblatex, specify citation and bibliography styles
-\usepackage[citestyle=verbose-ibid,maxcitenames=1,mincitenames=1,giveninits=true,backend=biber,bibstyle=ieee,sorting=none]{biblatex}
-\DeclareFieldFormat{labelnumberwidth}{\color{primary}#1}%
-\setlength{\biblabelsep}{8pt}%
-\renewbibmacro{in:}{}
-% for citations in side margin, only print author, title, and year
-% do not include the following items
-\AtEveryCitekey{%
-  \clearlist{publisher}%
-  \clearfield{edition}%
-  \clearfield{type}%
-  \clearfield{pages}%
-  \clearlist{location}%
-  \clearlist{institution}%
-  \clearfield{volume}%
-  \clearfield{number}%
-  \clearfield{journaltitle}%
-  \clearfield{booktitle}%
-}
+%%%%%%%
+%%%%%%%		Andrew: I replaced this bibliography section with your Citations section below
+%%%%%%%
+
+%% ----------- bibliography --------------
+%% setup biblatex, specify citation and bibliography styles
+%\usepackage[citestyle=verbose-ibid,maxcitenames=1,mincitenames=1,giveninits=true,backend=biber,bibstyle=ieee,sorting=none]{biblatex}
+%\DeclareFieldFormat{labelnumberwidth}{\color{primary}#1}%
+%\setlength{\biblabelsep}{8pt}%
+%\renewbibmacro{in:}{}
+%% for citations in side margin, only print author, title, and year
+%% do not include the following items
+%\AtEveryCitekey{%
+%  \clearlist{publisher}%
+%  \clearfield{edition}%
+%  \clearfield{type}%
+%  \clearfield{pages}%
+%  \clearlist{location}%
+%  \clearlist{institution}%
+%  \clearfield{volume}%
+%  \clearfield{number}%
+%  \clearfield{journaltitle}%
+%  \clearfield{booktitle}%
+%}
+%% ---------------------------------------
+%%%%%%%%%
+
+
+% ------------  Citations ------------------------
+
+\RequirePackage{marginfix}
+%\RequirePackage[hyperref=true,style=aiaa,giveninits=true,doi=true,isbn=true,
+%                url=true,backref,backrefstyle=none,maxcitenames=1,mincitenames=1,
+%                dateabbrev=false,urldate=long,labeldateparts]{biblatex}
+
+%% No back referencing
+\RequirePackage[hyperref=true,style=aiaa,giveninits=true,doi=true,isbn=true,
+                url=true,maxcitenames=1,mincitenames=1,
+                dateabbrev=false,urldate=long,labeldateparts]{biblatex}
+
+\DeclareCiteCommand{\mciten} % only prints number and puts reference in margin
+  {}
+  {\printtext[bibhyperref]{\printfield{labelnumber}}%
+   \usebibmacro{sidecite}}
+  {}
+  {}
+\DeclareCiteCommand{\citen} % only prints number, but not in margin (useful for figures)
+  {}
+  {\textsuperscript{\printtext[bibhyperref]{\printfield{labelnumber}}}}
+  {}
+  {}
+
+\DeclareCiteCommand{\nocite} % only prints number and puts reference in margin
+  {}
+  {\usebibmacro{sidecite}}
+  {}
+  {}
+
+\DeclareCiteCommand{\citet}
+{}
+{\printnames{labelname}\unspace\textsuperscript{\printtext[bibhyperref]{\printfield{labelnumber}}}%
+\usebibmacro{sidecite}}
+{}
+{}
+
+\DeclareCiteCommand{\sidecitenumber}
+{}
+{\textsuperscript{\printtext[bibhyperref]{\printfield{labelnumber}}}}
+{}
+{}
+
+\DeclareCiteCommand{\sidecitename}
+{}
+{\printnames{labelname}\unspace\textsuperscript{\printtext[bibhyperref]{\printfield{labelnumber}}}}
+{}
+{}
+
+% make mcite the default
+\let\cite=\mcite
+\let\autocite=\mcite
+
+\DeclareFieldFormat{sidecite}{\marginpar{\linespread{1.05}\scriptsize#1}}
+\newbibmacro{sidecite}{%
+  \printtext[sidecite]{%
+    \RaggedRight%
+    \printtext[bibhyperref]{\textcolor{primary}{\printfield{labelnumber}.}}
+    \textcolor{lighttext}{%
+    \printnames{labelname}%
+    \unspace, %
+    \iffieldundef{doi}{%
+      \iffieldundef{isbn}{%
+        \iffieldundef{url}{%
+          \ifentrytype{patent}{%
+            \href{https://patents.google.com/patent/US\thefield{number}/en}{\printfield[citetitle]{labeltitle}}%
+          }{%
+            \printfield[citetitle]{labeltitle}%
+          }%
+        }{% if only url is available
+          \href{https://\thefield{url}}{\printfield[citetitle]{labeltitle}}%
+        }%
+        %\printfield[citetitle]{labeltitle}%
+      }{% if only url or isbn is available
+        \href{https://books.google.com/books?vid=ISBN\thefield{isbn}}{\printfield[citetitle]{labeltitle}}%
+      }%
+    }%
+    {%
+      \href{https://dx.doi.org/\thefield{doi}}{\printfield[citetitle]{labeltitle}}%
+    }%
+    \setunit{\addperiod\space}%
+    \printfield{year}%
+    }%
+    }%
+  \setunit{}}
+% --------------------------
+%%%%%%%%%
+
+
+% -------------- hyperlinks -------------
+%\RequirePackage[pdftex,colorlinks,bookmarks,bookmarksnumbered,allcolors=royal,breaklinks]{hyperref}  % make hyperlinks royal
+\RequirePackage[pdftex,colorlinks,bookmarks,bookmarksnumbered,allcolors=black,breaklinks]{hyperref}	   % make hyperlinks black
 % ---------------------------------------
+
+% ---------- cross referencing ------------
+\RequirePackage[capitalise]{cleveref}
+% ---------------------------------------
+
+%%%%%%%%%%
+%% -------------- Hyperlinks ---------------------
+%
+%\RequirePackage[pdftex,plainpages=false]{hyperref}
+%\RequirePackage[capitalise]{cleveref}  % consistent cross referencing; needs to be *after* any packages that do not support it
+%\RequirePackage[all]{hypcap} % Makes sure hyperref points to beginning of
+%                         % the float, not the caption
+%\RequirePackage{bookmark}
+%\hypersetup{bookmarksdepth=2,bookmarksnumbered=true}
+%
+%% Use lining number in equation numbers
+% \makeatletter
+% \let\reftagform@=\tagform@
+% \def\tagform@#1{\maketag@@@{(\ignorespaces{\myliningnumfont#1}\unskip\@@italiccorr)}}
+% \renewcommand{\eqref}[1]{\textup{\reftagform@{\ref{#1}}}}
+% \makeatother
+%
+% % Use lining number in table
+% \setfloatadjustment{table}{\myliningnumfont}
+%
+%% break also on hyphens inside the \url command
+%\def\UrlBreaks{\do\.\do\@\do\\\do\/\do\!\do\_\do\|\do\;\do\>\do\]%
+%  \do\)\do\,\do\?\do\'\do+\do\=\do\#\do-} % \do- is new!
+%
+%% \urlstyle{sf}
+%\urlstyle{same}
+%
+%\hypersetup{%
+%  colorlinks=true,
+%  allcolors=primary,
+%  breaklinks,
+%  pdfborder=0 0 0,
+%}
+%
+%%%%%%%%%%
 
 % ---------- for testing ---------------
 \newcommand{\myshorttext}{{\color{mediumgray} Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Etiam lobortis facilisis sem. Nullam nec mi et neque pharetra sollicitudin. Praesent imperdiet mi nec ante. Donec ullamcorper, felis non sodales commodo, lectus velit ultrices augue, a dignissim nibh lectus placerat pede. Vivamus nunc nunc, molestie ut, ultricies vel, semper in, velit.}}

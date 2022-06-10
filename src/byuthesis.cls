@@ -341,7 +341,7 @@
 % ----------- title page --------------
 \RequirePackage{etoolbox}
 \newcommand*{\@printcommitteemember}[1]{#1\\}
-\newlength{\titlebottomadjust}  \setlength{\titlebottomadjust}{18pt}	% defined to tweak the length of the title page so that
+\newlength{\titlebottomadjust}  \setlength{\titlebottomadjust}{-4pt}	% defined to tweak the length of the title page so that
 																		% last line of text is at 1 inch above page bottom
 \newcommand{\titlepage}{%
 	% for fancy style, set the page margins to be equal to center title on page

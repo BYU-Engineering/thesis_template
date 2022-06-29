@@ -7,14 +7,14 @@
 % For example, \documentclass[fancy,phd]{byuthesis}
 %.          or \documentclass[simple,masters]{byuthesis}
 % Format options: fancy or simple (simple is default)
-%\newif\if@simple
-%\DeclareOption{simple}{\@simpletrue}
+\newif\if@simple
+\DeclareOption{simple}{\@simpletrue}
 \newif\if@fancy
 \DeclareOption{fancy}{\@fancytrue}
 
 % Degree options: masters or phd (masters is default)
-%\newif\if@masters
-%\DeclareOption{masters}{\@masterstrue}
+\newif\if@masters
+\DeclareOption{masters}{\@masterstrue}
 \newif\if@phd
 \DeclareOption{phd}{\@phdtrue}
 % -------------------------------------

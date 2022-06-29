@@ -41,11 +41,8 @@
 \RequirePackage[T1]{fontenc}
 
 %%%% Serif fonts for body text
-% mathpazo uses palatino for body text and **math** for a consistent look
-% osf option: old style font (for numbers)
-% sc option: small caps option
-%\RequirePackage[osf,sc]{mathpazo}
-\RequirePackage{mathpazo}
+% newpxtext uses palatino for body text while newpxmath uses palatino form math mode for a consistent look
+\RequirePackage{newpxtext,newpxmath}
 
 %% This font is not part of the standard LaTeX package and requires installation on your computer
 %%\usepackage[urw-garamond]{mathdesign}
@@ -62,6 +59,16 @@
 \RequirePackage[defaultsans,scale=0.95]{opensans} %% Alternatively
 % use the option 'defaultsans' instead of 'default' to replace the
 % sans serif font only.
+
+%%%% Enable semi bold of opensans font
+\DeclareRobustCommand{\sbshape}{%
+  \not@math@alphabet\sbshape\relax
+    \fontseries{sb}\selectfont
+}
+% Usage: \textsb{Words to be set with semibold font}
+ \DeclareTextFontCommand\textsb{\sbshape}
+
+
 % -------------------------------
 
 % ---------- colors -------------
@@ -284,10 +291,15 @@
 \appto\mainmatter{\pagestyle{byu}}
 % -----------------------------------------------
 
-
 % -------------- hyperlinks -------------
 %\RequirePackage[colorlinks,bookmarks,bookmarksnumbered,allcolors=royal,breaklinks]{hyperref}  % make hyperlinks royal
 \RequirePackage[colorlinks,bookmarks,bookmarksnumbered,allcolors=black,breaklinks]{hyperref}	   % make hyperlinks black
+
+% hack to suppress annoying hyperref warnings related to \listoffigures, \listoftables, and \printnomenclature
+\pdfstringdefDisableCommands{%
+  \let\leavevmode@ifvmode\@empty
+  \let\kern\@empty
+}
 % ---------------------------------------
 
 % ---------- cross referencing ------------

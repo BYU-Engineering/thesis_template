@@ -310,7 +310,7 @@
 \if@fancy
 	% do nothing for fancy style here, see fancy style options below
 \else
-	\usepackage[backend=biber,style=ieee]{biblatex}
+	\usepackage[backend=biber,style=ieee,doi=true]{biblatex}
 \fi
 % ---------------------------------------
 
@@ -546,9 +546,18 @@
 
 % ----------- bibliography --------------
 % setup biblatex, specify citation and bibliography styles
-\usepackage[citestyle=verbose-ibid,maxcitenames=1,mincitenames=1,giveninits=true,backend=biber,bibstyle=ieee,sorting=none]{biblatex}
+\usepackage[
+	citestyle=verbose-ibid,
+	maxcitenames=1,
+	mincitenames=1,
+	giveninits=true,
+	backend=biber,
+	bibstyle=ieee,
+	sorting=none,
+	doi=true
+]{biblatex}
 \DeclareFieldFormat{labelnumberwidth}{\color{primary}#1}%
-\setlength{\biblabelsep}{8pt}%
+\setlength{\biblabelsep}{10pt}%
 \renewbibmacro{in:}{}
 % for citations in side margin, only print author, title, and year
 % do not include the following items
@@ -563,6 +572,7 @@
   \clearfield{number}%
   \clearfield{journaltitle}%
   \clearfield{booktitle}%
+  \clearfield{doi}%
 }
 % ---------------------------------------
 

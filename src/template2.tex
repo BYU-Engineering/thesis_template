@@ -1,0 +1,137 @@
+\documentclass[fancy,phd]{byuthesis2}
+% Class options are simple/fancy and masters/phd.
+% Leave options blank for defaults.
+% Defaults are simple for document style, and masters for degree type.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Custom options and packages %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Define path to figure files
+\graphicspath{{figures/}}
+
+% Define sequences of Latin text to fill space in example documents
+% (not needed for your thesis -- delete or comment out if you'd like)
+\usepackage{blindtext} 
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Define title page elements %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Thesis title for required BYU title page
+\title{Exceptional Engineering Research That Has Taken Longer \\ Than Everyone Thought It Would}
+
+% On the custom title page, use the same title, but format as you like
+\customtitle{Exceptional Engineering Research \\ That Has Taken Longer Than \\ Everyone Thought It Would}
+
+% Your name goes here:
+\author{Emma J. Student}
+
+% This is the date of graduation
+\date{April 2021}
+
+% If your degree is not a PhD or MS, then you can overwrite the degree using 
+% the \degree command: \degree{Bachelors of Basics}
+
+% Your department
+\department{Department of Electrical and Computer Engineering}
+
+% The names of your committee members
+\committeechair{Norman D. Smith}
+\committeemember{Mary Q. Scott}
+\committeemember{Steven R. Jones}
+\committeemember{Anna B. Hanna}
+
+% Include any keywords you would like for your thesis/dissertation
+\keywords{awesome stuff, killer app, buzz words}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% ---Bibliography source file--- %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%  Default is references.bib 
+\bibliography{references}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+% --- Begin Document --- %
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% --- Front matter (probably don't need to change)--- %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\frontmatter
+	
+	\titlepage
+	\cleardoublepage
+
+	\customtitlepage
+	\cleardoublepage
+
+	\input{abstract}
+	\cleardoublepage
+
+	\input{acknowledgments}
+	\cleardoublepage
+
+	\tableofcontents*
+	\cleardoublepage
+
+	\listoffigures
+	\cleardoublepage
+
+	\listoftables
+	\clearpage
+
+	\input{nomenclature}
+	\clearpage
+
+
+%%%%%%%%%%%%%%%%%%%%%
+% --- Main Body --- %
+%%%%%%%%%%%%%%%%%%%%%
+	\mainmatter
+
+% Here you want to include the .tex files where you have your chapter content.  
+% You can name the files whatever you want, but make sure that what you call 
+% them here matches what you name them.
+%
+% Note that the chapter .tex files for the simple template and fancy template 
+% are different because fancy template option has commands and features not 
+% available in the simple template option. 
+
+% Fancy Version
+	\include{fancychapters/chap1}
+	\include{fancychapters/chap2}
+	\include{fancychapters/chap3}
+	\include{fancychapters/chap4}
+
+% Simple Version
+%	\include{simplechapters/chap1}
+%	\include{simplechapters/chap2}
+%	\include{simplechapters/chap3}
+%	\include{simplechapters/chap4}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%
+% --- Bibliography --- %
+%%%%%%%%%%%%%%%%%%%%%%%%
+	\printbibliography[title=References]
+
+
+%%%%%%%%%%%%%%%%%%%%%
+% --- Appendices --- %
+%%%%%%%%%%%%%%%%%%%%%
+	\appendix
+
+	\include{appenA}
+	\include{appenB}
+
+
+
+%%%%%%%%%%%%%%%
+% --- End --- %
+%%%%%%%%%%%%%%%
+\end{document}

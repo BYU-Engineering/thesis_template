@@ -311,6 +311,9 @@
 	% do nothing for fancy style here, see fancy style options below
 \else
 	\usepackage[backend=biber,style=ieee,doi=true]{biblatex}
+	\defbibheading{bibliography}[\refname]{%
+                      \chapter*{#1}%
+                      \markboth{#1}{#1}}
 \fi
 % ---------------------------------------
 
@@ -556,6 +559,10 @@
 	sorting=none,
 	doi=true
 ]{biblatex}
+% Change bibliography title to References in "chapter" title and headings
+\defbibheading{bibliography}[\refname]{%
+                      \chapter*{#1}%
+                      \markboth{#1}{#1}}
 \DeclareFieldFormat{labelnumberwidth}{\color{primary}#1}%
 \setlength{\biblabelsep}{10pt}%
 \renewbibmacro{in:}{}

@@ -311,9 +311,10 @@
 	% do nothing for fancy style here, see fancy style options below
 \else
 	\usepackage[backend=biber,style=ieee,doi=true]{biblatex}
-	\defbibheading{bibliography}[\refname]{%
-                      \chapter*{#1}%
-                      \markboth{#1}{#1}}
+	% This command, in conjunction with the \printbibliography[heading=bibheadname]
+	% command in the document causes the chapter headings to be set properly for the
+	% bibliography.
+	\defbibheading{bibheadname}{\bibsection} % \bibsection is bibliography heading name from memoir
 \fi
 % ---------------------------------------
 
@@ -559,10 +560,10 @@
 	sorting=none,
 	doi=true
 ]{biblatex}
-% Change bibliography title to References in "chapter" title and headings
-\defbibheading{bibliography}[\refname]{%
-                      \chapter*{#1}%
-                      \markboth{#1}{#1}}
+% This command, in conjunction with the \printbibliography[heading=bibheadname]
+% command in the document causes the chapter headings to be set properly for the
+% bibliography.
+\defbibheading{bibheadname}{\bibsection} % \bibsection is bibliography heading name from memoir
 \DeclareFieldFormat{labelnumberwidth}{\color{primary}#1}%
 \setlength{\biblabelsep}{10pt}%
 \renewbibmacro{in:}{}

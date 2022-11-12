@@ -274,7 +274,8 @@
   {}%
 }
 
-\renewbibmacro*{isbn}{%
+%\renewbibmacro*{isbn}{%
+\newbibmacro*{isbn}{%
   \setunit{\adddot\addspace}%
   \iftoggle{bbx:isbn}
     {%
@@ -357,7 +358,8 @@
   \midsentence
 }
 
-\renewbibmacro*{shortjournal}{%
+%\renewbibmacro*{shortjournal}{%
+\newbibmacro*{shortjournal}{%
   \iffieldundef{shortjournal}
     {}
     {%
@@ -382,7 +384,8 @@
   \setunit{\addspace}%
 }
 
-\renewbibmacro*{shortjournal+issuetitle}{%
+%\renewbibmacro*{shortjournal+issuetitle}{%
+\newbibmacro*{shortjournal+issuetitle}{%
   \usebibmacro{shortjournal}%
   \newunit
   \iffieldundef{series}

@@ -93,7 +93,7 @@
 % -------- math ----------
 \RequirePackage{amsmath}
 \RequirePackage{amsfonts}
-\RequirePackage{amssymb}
+%\RequirePackage{amssymb}	% throws error in Overleaf
 % ------------------------------
 
 % -------- algorithms ----------
@@ -293,7 +293,9 @@
 
 % -------------- hyperlinks -------------
 %\RequirePackage[colorlinks,bookmarks,bookmarksnumbered,allcolors=royal,breaklinks]{hyperref}  % make hyperlinks royal
-\RequirePackage[colorlinks,bookmarks,bookmarksnumbered,allcolors=black,breaklinks]{hyperref}	   % make hyperlinks black
+%\RequirePackage[colorlinks,bookmarks,bookmarksnumbered,allcolors=black,breaklinks]{hyperref}	   % make hyperlinks black
+%\RequirePackage[colorlinks,bookmarks,bookmarksnumbered,allcolors=mediumgray,breaklinks]{hyperref}	   % make hyperlinks mediumgray
+\RequirePackage[colorlinks,bookmarks,bookmarksnumbered,hidelinks,breaklinks]{hyperref}	   % make hyperlinks same color as surrounding text
 
 % hack to suppress annoying hyperref warnings related to \listoffigures, \listoftables, and \printnomenclature
 \pdfstringdefDisableCommands{%
@@ -513,28 +515,27 @@
 % ---------------------------------------
 
 % ------------- footnotes ----------------
-\RequirePackage{marginfix}							% This package fixes the issue of margin notes overflowing the page: it makes them break into the next page instead
+\RequirePackage{marginfix}		% This package fixes the issue of margin notes overflowing the page: it makes them break into the next page instead
 
 % we place footnotes in the side margin and typeset them using the parameters associated with \footnotes
-% \sidefootnotes are treated separately
-%\renewcommand{\@makefntext}[1]{\makefootmark\raggedright #1}. % allow footnotes to be ragged right
+\renewcommand*{\@makefntext}[1]{\makefootmark\raggedright #1}  % allow footnotes to be ragged right
 %\renewcommand*{\thefootnote}{\fnsymbol{footnote}}	% use symbols to denote footnotes
+\renewcommand*{\thefootnote}{\itshape\alph{footnote}}	% use letters to denote footnotes
 \newcommand{\shsp}{\hspace{4pt}}
-\footmarkstyle{\color{primary}#1\shsp}
-\renewcommand{\foottextfont}{\scriptsize\color{mediumgray}}			% slightly smaller fontsize since we are placing footnotes in margin
-\setlength{\footmarkwidth}{0em} 					% space allocated for the width of the mark
-\setlength{\footmarksep}{0em}						% space between the mark and the following text
+\footmarkstyle{\textsuperscript{\scriptsize\itshape #1}}
+\renewcommand{\foottextfont}{\scriptsize}			% slightly smaller fontsize since we are placing footnotes in margin
+\setlength{\footmarkwidth}{0em} 							
+\setlength{\footmarksep}{0em}						
 \setlength{\footparindent}{1em}						% paragraph indent for a multi-paragraph footnote
-\counterwithout{footnote}{chapter}					% do not restart footnote numbering with each chapter'
+%\counterwithout{footnote}{chapter}					% do not restart footnote numbering with each chapter
 \footnotesinmargin									% put footnotes in the side margin
 % ---------------------------------------
 
-% ------------- sidenotes ---------------
-% create a new footnote series for sidenotes
-\newcounter{snote}[chapter]
-\newcommand\sidenote[1]{\stepcounter{snote}\textsuperscript{%
-		\fnsymbol{snote}}\marginpar{\scriptsize\textsuperscript{%
-			\scriptsize\fnsymbol{snote}}#1}}
+% ------------- reference margin notes for backreferencing ---------------
+% used by byubib.bbx
+\newcounter{rnote}
+\newcommand\refnote[1]{\stepcounter{rnote}\marginpar{\MakeLowercase{#1}}}
+
 % ---------------------------------------
 
 % -------- figures ------------
@@ -543,23 +544,28 @@
 \setsidecappos{b} %this aligns the side caption with the bottom of the figure
 \setsidecaps{0.125in}{2.0in} %this controls the spacing from the edge of the text, and then the width of the box the caption sits in.
 %this makes the name of the caption (e.g. Figure 1) bold, small, and blue (the number and word are controlled with separate commands)
-%
 \captionnamefont{\bfseries\footnotesize\color{royal}}
 \captiontitlefont{\footnotesize}
 % ------------------------------
 
 % ----------- bibliography --------------
+
 % setup biblatex, specify citation and bibliography styles
-\usepackage[
-	citestyle=verbose-ibid,
-	maxcitenames=1,
-	mincitenames=1,
+\RequirePackage[
+	hyperref=true,
+	backref=true,		% adds page number where citation occurs to references
+	citestyle=byubib,	% citation style (byubib.cbx)
+	bibstyle=byubib,	% bibliography style (byubib.bbx)
 	giveninits=true,
-	backend=biber,
-	bibstyle=ieee,
-	sorting=none,
-	doi=true
+	doi=true,			% add doi information to bibliography
+	url=true,			% adds hyperlinks to citations and bibliography
+	maxcitenames=1,		% only one surname in citations
+	mincitenames=1,
+	dateabbrev=false,
+	urldate=long,
+	labeldateparts
 ]{biblatex}
+
 % This command, in conjunction with the \printbibliography[heading=bibheadname]
 % command in the document causes the chapter headings to be set properly for the
 % bibliography.
@@ -567,21 +573,56 @@
 \DeclareFieldFormat{labelnumberwidth}{\color{primary}#1}%
 \setlength{\biblabelsep}{10pt}%
 \renewbibmacro{in:}{}
-% for citations in side margin, only print author, title, and year
-% do not include the following items
-\AtEveryCitekey{%
-  \clearlist{publisher}%
-  \clearfield{edition}%
-  \clearfield{type}%
-  \clearfield{pages}%
-  \clearlist{location}%
-  \clearlist{institution}%
-  \clearfield{volume}%
-  \clearfield{number}%
-  \clearfield{journaltitle}%
-  \clearfield{booktitle}%
-  \clearfield{doi}%
-}
+
+% ------------  Citations ------------------------
+% Some optional citation commands
+\DeclareCiteCommand{\mciten} % only prints number and puts reference in margin
+	{}
+	{\printtext[bibhyperref]{\printfield{labelnumber}}%
+	   \usebibmacro{sidecite}}
+	{}
+	{}
+\DeclareCiteCommand{\citen} % only prints number, but not in margin (useful for figures)
+	{}
+	{{\printtext[bibhyperref]{\printfield{labelnumber}}}}
+	{}
+	{}
+\DeclareCiteCommand{\nobibcite} % only prints number and puts reference in margin
+	{}
+	{\usebibmacro{sidecite}}
+	{}
+	{}
+\DeclareCiteCommand{\sidecitenumber}
+	{}
+	{{\printtext[bibhyperref]{[\printfield{labelnumber}]}}}
+	{}
+	{}
+\DeclareCiteCommand{\sidecitename}
+	{}
+	{\printnames{labelname}\unspace{\printtext[bibhyperref]{[\printfield{labelnumber}]}}}
+	{}
+	{}
+
+%% make scite the default citation command for fancy format
+\let\scite=\mcite		% use scite instead of replacing cite
+
+% sidecite bibliography macro to create citations in the side margin
+\DeclareFieldFormat{sidecite}{\marginpar{\linespread{1.0}\scriptsize#1}}
+\newbibmacro{sidecite}{%
+  \printtext[sidecite]{%
+     \raggedright%
+     \printtext[bibhyperref]{\textcolor{primary}{\printfield{labelnumber}}\:}
+     \textcolor{mediumgray}{%
+	    \printnames{labelname}%
+	    \unspace, %
+		\printfield[citetitle]{labeltitle}%
+		\newunit
+		\usebibmacro{shortjournal}%
+		\unspace, %
+		\printfield{year}.%
+		}%
+     }%
+  \setunit{}}
 % ---------------------------------------
 
 % ---------- for testing ---------------

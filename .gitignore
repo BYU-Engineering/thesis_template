@@ -281,4 +281,5 @@ src/.DS_Store
 src/simple_example_template.pdf
 src/fancy_example_template.pdf
 src/template2.pdf
-*.pdf
+src/template_alt.pdf
+

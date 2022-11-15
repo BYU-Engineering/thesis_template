@@ -1,6 +1,11 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{byuthesis}
-% Written by Tim McLain and Andrew Ning. September 2020.
+% Written by Tim McLain starting in September 2020.
+% Significant contributions by Andrew Ning (who suggested using the memoir class as the foundation for
+% the template), Ed Alvarez, Judd Mehr, and Victoria Stephens. A tip of the hat to Max Opgenoord -- the 
+%format of his MIT PhD thesis inspired many of the elements of the fancy format class option.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % -------- set user options for byuthesis class -----------
 % Options are declared by user when specifying the document class such as in the template.tex file
@@ -116,7 +121,7 @@
 % ------------- nomeclature -------------
 \RequirePackage[intoc]{nomencl}
 \makenomenclature
-\renewcommand{\nomname}{Nomenclature\;}  % hack to get spacing in ToC between name and number right
+\renewcommand{\nomname}{Nomenclature}
 %\setlength{\nomitemsep}{-\parsep}  % tight single space
 \setlength{\nomitemsep}{0pt}  % relaxed spacing (nominal spacing is looser than this)
 % ---------------------------------------
@@ -186,8 +191,8 @@
 
 % Table of contents formatting (and LoF and LoT)
 \renewcommand{\contentsname}{Table of Contents}
-\renewcommand{\listfigurename}{List of Figures\;\;}	% hack to get spacing in ToC between name and number right
-\renewcommand{\listtablename}{List of Tables\;\;}	% hack to get spacing in ToC between name and number right
+\renewcommand{\listfigurename}{List of Figures}	
+\renewcommand{\listtablename}{List of Tables}
 
 %% change title style for toc, lof, lot
 % Bold face, size LARGE titles
@@ -201,15 +206,20 @@
 \renewcommand{\printlottitle}[1]{\normalfont\LARGE\sffamily\colorchaptitle\itshape #1}
 
 % put page number right after in toc, lof, lot
-\renewcommand{\cftchapterleader}{}
+\newcommand{\cfthsp}{\hspace{8pt}}			% controls the spacing between the title and the page number in toc, lof, lot
+\renewcommand{\cftchapterleader}{\cfthsp}
 \renewcommand{\cftchapterafterpnum}{\cftparfillskip}
-%\renewcommand{\cftchapterafterpnum}{\hsp}
-\renewcommand{\cftsectionleader}{}
+\renewcommand\cftchapterformatpnum[1]{~{\cftchapterpagefont #1}}
+\renewcommand{\cftsectionleader}{\cfthsp}
 \renewcommand{\cftsectionafterpnum}{\cftparfillskip}
-\renewcommand{\cftfigureleader}{}
+\renewcommand\cftsectionformatpnum[1]{~{\cftsectionpagefont #1}}
+\renewcommand{\cftfigureleader}{\cfthsp}
 \renewcommand{\cftfigureafterpnum}{\cftparfillskip}
-\renewcommand{\cfttableleader}{}
+\renewcommand\cftfigureformatpnum[1]{~{\cftsectionpagefont #1}}
+\renewcommand{\cfttableleader}{\cfthsp}
 \renewcommand{\cfttableafterpnum}{\cftparfillskip}
+\renewcommand\cfttableformatpnum[1]{~{\cftsectionpagefont #1}}
+
 
 % unbold titles in toc
 \renewcommand{\cftchapterfont}{}

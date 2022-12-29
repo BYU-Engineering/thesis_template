@@ -630,6 +630,7 @@
 		\usebibmacro{shortjournal}%
 		\unspace, %
 		\printfield{year}.%
+		\vspace{-0.75\baselineskip}%    % this command decreases the spacing between citations when they come in groups
 		}%
      }%
   \setunit{}}

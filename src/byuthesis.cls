@@ -3,7 +3,7 @@
 % Written by Tim McLain starting in September 2020.
 % Significant contributions by Andrew Ning (who suggested using the memoir class as the foundation for
 % the template), Ed Alvarez, Judd Mehr, and Victoria Stephens. A tip of the hat to Max Opgenoord -- the 
-%format of his MIT PhD thesis inspired many of the elements of the fancy format class option.
+% format of his MIT PhD thesis inspired many of the elements of the fancy format class option.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -327,6 +327,13 @@
 	% command in the document causes the chapter headings to be set properly for the
 	% bibliography.
 	\defbibheading{bibheadname}{\bibsection} % \bibsection is bibliography heading name from memoir
+	\urlstyle{same}
+	% Change type of DOI: and DOI URL to match text
+	\DeclareFieldFormat{doi}{%
+		DOI\addcolon\space
+		\ifhyperref
+		{\lowercase{\href{https://doi.org/#1}{\nolinkurl{#1}}}}
+		{\lowercase{\nolinkurl{#1}}}}
 \fi
 % ---------------------------------------
 
@@ -352,7 +359,7 @@
 \if@phd
 	\degree{Doctor of Philosophy}
 \else
-	\degree{Masters of Science}
+	\degree{Master of Science}
 \fi
 
 \newcommand*{\@committeelist}{}
@@ -377,7 +384,7 @@
 		\setlrmarginsandblock{1.75in}{1.75in}{*}
 		\checkandfixthelayout
 	\fi
-	\pdfbookmark{TITLE PAGE}{titlepage}
+	\pdfbookmark{BYU TITLE PAGE}{titlepage}
 	\pagestyle{empty}
 	\begin{Spacing}{2.0}
 		\begin{center}
@@ -422,6 +429,7 @@
 %
 
 \newcommand{\customtitlepage}{%
+	\pdfbookmark{TITLE PAGE}{customtitlepage}
 	\pagestyle{empty}
 	\begin{Spacing}{2.2}
 		\vspace*{116pt}
@@ -575,6 +583,14 @@
 	urldate=long,
 	labeldateparts
 ]{biblatex}
+
+% Change type of DOI: and DOI URL to match text
+\urlstyle{same}
+\DeclareFieldFormat{doi}{%
+	DOI\addcolon\space
+	\ifhyperref
+	{\lowercase{\href{https://doi.org/#1}{\nolinkurl{#1}}}}
+	{\lowercase{\nolinkurl{#1}}}}
 
 % This command, in conjunction with the \printbibliography[heading=bibheadname]
 % command in the document causes the chapter headings to be set properly for the

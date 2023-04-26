@@ -159,6 +159,7 @@
 	% commands to format and instantiate appendix divider page (no page number)
   	\begingroup
   	\makeatletter
+	\break
   	\let\ps@plain\ps@empty		% temporarily redefine appendix divider page style to empty (to get rid of page number)
 	\renewcommand{\parttitlefont}{\normalfont\huge\sffamily\itshape\colorchapnum\raggedright}  % format the font
 	\appendixpage	% put in the appendix divider page

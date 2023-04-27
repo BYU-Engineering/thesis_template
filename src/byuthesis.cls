@@ -269,7 +269,7 @@
 \createplainmark{index}{both}{\indexname}
 \createplainmark{glossary}{both}{\glossaryname}}
 
-%% One-sided printing
+% One-sided printing
 % Place page number in top right corner of all pages except chapter title pages
 % Place chapter title in top left corner of all pages except chapter title pages
 \makeoddhead{byu}%
@@ -278,25 +278,16 @@
 \makeoddfoot{byu}%
     {}{}{}
 
-%%% One-sided printing
-%% Place page number in bottom right corner of all pages
-%% Place section title in top right corner of all pages except
-%% chapter title pages
-%\makeoddhead{byu}%
-%	{\normalfont\small\slshape\leftmark}{}{\normalfont\small\slshape\rightmark}	% include chapter title
-%%    {}{}{\normalfont\small\slshape\rightmark}	% don't include chapter title
-%\makeoddfoot{byu}%
-%    {}{}{\normalfont\small\slshape\thepage}
 
 %% Two-sided printing for simple format only
 %\makeoddhead{byu}%
-%    {}{}{\normalfont\small\slshape\leftmark}
+%    {\normalfont\small\slshape\leftmark}{}{\normalfont\small\slshape\thepage}
 %\makeevenhead{byu}%
-%    {\normalfont\small\slshape\rightmark}{}{}
+%    {\normalfont\small\slshape\thepage}{}{\normalfont\small\slshape\leftmark}
 %\makeoddfoot{byu}%
-%    {}{}{\normalfont\small\slshape\thepage}
+%    {}{}{}
 %\makeevenfoot{byu}%
-%    {\normalfont\small\slshape\thepage}{}{}
+%    {}{}{}
 
 \pagestyle{byu}
 \appto\mainmatter{\pagestyle{byu}}

@@ -92,7 +92,7 @@
 % -------- figures ------------
 \RequirePackage{graphicx}
 \RequirePackage{rotating}
-\RequirePackage[export]{adjustbox}
+\RequirePackage[export]{adjustbox} % inner option used to align full-width figures to inner margin
 % ------------------------------
 
 % -------- math ----------

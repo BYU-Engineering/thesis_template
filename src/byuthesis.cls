@@ -73,7 +73,6 @@
 % Usage: \textsb{Words to be set with semibold font}
  \DeclareTextFontCommand\textsb{\sbshape}
 
-
 % -------------------------------
 
 % ---------- colors -------------
@@ -93,6 +92,7 @@
 % -------- figures ------------
 \RequirePackage{graphicx}
 \RequirePackage{rotating}
+\RequirePackage[export]{adjustbox}
 % ------------------------------
 
 % -------- math ----------
@@ -558,13 +558,21 @@
 % ---------------------------------------
 
 % -------- figures ------------
-\RequirePackage{graphicx}
-\sidecapmargin{right} %this puts the sidecaptions in the right margin
-\setsidecappos{b} %this aligns the side caption with the bottom of the figure
-\setsidecaps{0.125in}{2.0in} %this controls the spacing from the edge of the text, and then the width of the box the caption sits in.
-%this makes the name of the caption (e.g. Figure 1) bold, small, and blue (the number and word are controlled with separate commands)
+\sidecapmargin{outer} % this puts the sidecaptions in the outer margin (supports both single-sided and two-sided printing)
+\setsidecappos{b} % this aligns the side caption with the bottom of the figure
+\setsidecaps{0.125in}{2.0in} % this controls the spacing from the edge of the text, and then the width of the box the caption sits in.
+% this makes the name of the caption (e.g. Figure 1) bold, small, and blue (the number and word are controlled with separate commands)
 \captionnamefont{\bfseries\footnotesize\color{royal}}
 \captiontitlefont{\footnotesize}
+% this redefinition left justifies the captions in both the right and left margins (needed for two-sided printing)
+\renewcommand*{\sidecapstyle}{%
+%%  \captionnamefont{\bfseries}
+  \ifscapmargleft
+    \captionstyle{\raggedright}%
+  \else
+    \captionstyle{\raggedright}%
+\fi}
+
 % ------------------------------
 
 % ----------- bibliography --------------

@@ -39,27 +39,15 @@
 \DeclareOption{twoside}{\@twosidetrue \@onesidefalse}
 % -------------------------------------
 
-% -------- set main options to class -------------
-%\if@twoside
-%	% two-sided printing
-%	\DeclareOption{twoside}{\PassOptionsToClass{\CurrentOption}{memoir}}
-%	\message{****************TWOSIDE!!!}
-%\else
-%	% one-sided printing (default)
-%	\DeclareOption{oneside}{\PassOptionsToClass{\CurrentOption}{memoir}}
-%	\message{****************ONESIDE!!!}
-%\fi
+% -------- send main options to class -------------
 \ProcessOptions\relax
 \if@twoside
 	% two-sided printing
 	\LoadClass[letterpaper,11pt,twoside,openright]{memoir}  % based off of memoir class
-	\message{****************TWOSIDE!!!}
 \else
 	% one-sided printing (default)
 	\LoadClass[letterpaper,11pt,oneside,openright]{memoir}  % based off of memoir class
-	\message{****************ONESIDE!!!}
 \fi
-%\LoadClass[letterpaper,11pt,openright]{memoir}  % based off of memoir class
 \RequirePackage{memhfixc}  % fix for hyperref w/ memoir
 % ----------------------------------------------
 
@@ -338,7 +326,6 @@
 \if@fancy
 	% do nothing for fancy style here, see fancy style options below
 \else
-	\message{****************SIMPLE (BIB)!!!}	
 	\usepackage[backend=biber,style=ieee,doi=true]{biblatex}
 	\urlstyle{same}
 	% Change type of DOI: and DOI URL to match text

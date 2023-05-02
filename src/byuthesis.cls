@@ -1,5 +1,5 @@
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{byuthesis}
+\ProvidesClass{byuthesis}[2023/05/01 v1.0 BYU thesis]
 % Written by Tim McLain starting in September 2020.
 % Significant contributions by Andrew Ning (who suggested using the memoir class as the foundation for
 % the template), Ed Alvarez, Judd Mehr, and Victoria Stephens. A tip of the hat to Max Opgenoord -- the 
@@ -25,13 +25,13 @@
 
 % Pagination options: oneside or twoside (oneside is default)
 % NOTE: Two-sided printing is not a requirement of the college or university
-%       Some departments or students in our college like the option of printing
-%		two-sided hard copies. The twoside option is intended to provide this
-%		capability. However, this option may require some tweaking, such as adding
-%		blank pages in places to ensure that abstract, acknowledgements, and first 
-%       pages of chapters start the recto (right-hand) page. This two-sided printing
-%		capability is provided as a courtesy. The College of Engineering does not
-%       provide user support for two-sided printing.
+%	Some departments or students in our college like the option of printing
+%	two-sided hard copies. The twoside option is intended to provide this
+%	capability. However, this option may require some tweaking, such as adding
+%	blank pages in places to ensure that abstract, acknowledgements, and first 
+%	pages of chapters start the recto (right-hand) page. This two-sided printing
+%	capability is provided as a courtesy. The College of Engineering does not
+%	provide user support for two-sided printing.
 %
 \newif\if@oneside
 \@onesidetrue
@@ -169,20 +169,9 @@
 \chapterstyle{byuchapter}
 
 % appendix formatting
-\newcommand{\byuappendix}{%
-	% commands to format and instantiate appendix divider page (no page number)
-  	\begingroup
-  	\makeatletter
-	\break
-  	\let\ps@plain\ps@empty		% temporarily redefine appendix divider page style to empty (to get rid of page number)
-	\renewcommand{\parttitlefont}{\normalfont\huge\sffamily\itshape\colorchapnum\raggedright}  % format the font
-	\appendixpage	% put in the appendix divider page
-  	\makeatother
-  	\endgroup
-}
-
+\renewcommand{\parttitlefont}{\normalfont\huge\sffamily\itshape\colorchapnum\raggedright}  % format the font
 \RequirePackage{etoolbox}		% provides \appto command used below (append to)
-\appto\appendix{\byuappendix}
+\appto\appendix{\appendixpage}
 
 % section heading formatting
 \setsecheadstyle{\normalfont\large\sffamily\colorsectitle\raggedright}%
@@ -229,7 +218,6 @@
 \renewcommand{\cfttableleader}{\cfthsp}
 \renewcommand{\cfttableafterpnum}{\cftparfillskip}
 \renewcommand\cfttableformatpnum[1]{~{\cftsectionpagefont #1}}
-
 
 % unbold titles in toc
 \renewcommand{\cftchapterfont}{}

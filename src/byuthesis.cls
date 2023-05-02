@@ -169,6 +169,7 @@
 \chapterstyle{byuchapter}
 
 % appendix formatting
+\aliaspagestyle{part}{empty}
 \renewcommand{\parttitlefont}{\normalfont\huge\sffamily\itshape\colorchapnum\raggedright}  % format the font
 \RequirePackage{etoolbox}		% provides \appto command used below (append to)
 \appto\appendix{\appendixpage}

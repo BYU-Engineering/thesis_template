@@ -671,7 +671,8 @@
   \usebibmacro{begentry}%
   \usebibmacro{author/translator+others}%
   \newunit
-  \usebibmacro{maintitle+title}%
+%  \usebibmacro{maintitle+title}		%%%% Uses case specified in .bibfile in article titles
+  \usebibmacro{title}%				%%%% Forces sentence case in article titles
   \newunit
   \printlist{language}%
   \newunit\newblock
@@ -900,7 +901,8 @@
   \usebibmacro{pageref}%
   \usebibmacro{author/editor+others/translator+others}%
   \newunit
-  \usebibmacro{maintitle+title}%
+%  \usebibmacro{maintitle+title}%			%%%% Uses case specified in .bibfile in online titles
+  \usebibmacro{title}%						%%%% Forces sentence case in online titles
   \newunit
   \printlist{language}%
   \newunit\newblock
@@ -1011,7 +1013,8 @@
   \usebibmacro{pageref}%
   \usebibmacro{author}%
   \setunit{\labelnamepunct}\newblock
-  \usebibmacro{maintitle+title}%
+%  \usebibmacro{maintitle+title}%			%%%% Uses case provided in .bib file in unpublished titles
+  \usebibmacro{title}%						%%%% Forces sentence case in unpublished titles	  
   \newunit
   \printlist{language}%
   \newunit\newblock
@@ -1122,7 +1125,8 @@
   \usebibmacro{pageref}%
   \usebibmacro{author/translator+others}%
   \setunit{\labelnamepunct}\newblock
-  \usebibmacro{maintitle+title}%
+%  \usebibmacro{maintitle+title}%		%%%% Uses case provided in .bib file in proceedings titles
+  \usebibmacro{title}%					%%%% Forces sentence case in proceedings titles			
   \newunit
   \printlist{language}%
   \newunit\newblock

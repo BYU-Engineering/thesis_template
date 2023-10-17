@@ -1,0 +1,27 @@
+# Basic Github CI workflow
+name: CI Tests
+
+on:
+  pull_request:
+
+env:
+  apt_packages: latexmk texlive-latex-recommended texlive-fonts-extra texlive-science texlive-bibtex-extra biber
+
+jobs:
+  test-one-sided:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install dependencies
+        run: sudo apt install $apt_packages
+      - name: Run test
+        run: cd .github && make onesided
+
+  test-two-sided:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install dependencies
+        run: sudo apt install $apt_packages
+      - name: Run test
+        run: cd .github && make twosided

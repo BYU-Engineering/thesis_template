@@ -588,9 +588,9 @@
 	{\lowercase{\href{https://doi.org/#1}{\nolinkurl{#1}}}}
 	{\lowercase{\nolinkurl{#1}}}}
 
-\DeclareFieldFormat{labelnumberwidth}{\color{primary}#1}%
-\setlength{\biblabelsep}{10pt}%
-\renewbibmacro{in:}{}
+% Change label color and remove brackets
+% Other formatting of bibliography handled by byubib.bbx
+\DeclareFieldFormat{labelnumberwidth}{\color{primary}#1}% 
 
 % ------------  Citations ------------------------
 % Some optional citation commands
@@ -624,7 +624,8 @@
 %% make scite the default citation command for fancy format
 \let\scite=\mcite		% use scite instead of replacing cite
 
-% sidecite bibliography macro to create citations in the side margin
+% Use sidecite bibliography macro to create citations in the side margin
+% Other citation formatting (e.g. superscript vs on line) handled by byubib.cbx 
 \DeclareFieldFormat{sidecite}{\marginpar{\linespread{1.0}\scriptsize#1}}
 \newbibmacro{sidecite}{%
   \printtext[sidecite]{%

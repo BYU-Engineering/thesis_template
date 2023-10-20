@@ -23,6 +23,19 @@
 \newif\if@phd
 \DeclareOption{phd}{\@phdtrue \@mastersfalse}
 
+% Citation options under the fancy format option: onlinecite or supercite 
+% (onlinecite is default)
+% Under the fancy format option, citations can either show up as numbers 
+% in brackets on the line of text (onlinecite) or superscripted above the 
+% text (supercite). With the onlinecite option, the reference list and 
+% the sidenote citation will show the reference number in brackets. With 
+% the supercite option brackets will not appear around the reference number.
+\newif\if@onlinecite
+\@onlinecitetrue
+\newif\if@supercite
+\DeclareOption{supercite}{\@supercitetrue \@onlinecitefalse}
+% -------------------------------------
+
 % Pagination options: oneside or twoside (oneside is default)
 % NOTE: Two-sided printing is not a requirement of the college or university
 %	Some departments or students in our college like the option of printing
@@ -588,10 +601,11 @@
 	{\lowercase{\href{https://doi.org/#1}{\nolinkurl{#1}}}}
 	{\lowercase{\nolinkurl{#1}}}}
 
-% Change label color and remove brackets
-% Other formatting of bibliography handled by byubib.bbx
-\DeclareFieldFormat{labelnumberwidth}{\color{primary}#1}% 
-
+\if@supercite
+   % Change label color and remove brackets
+   % Other formatting of bibliography handled by byubib.bbx
+   \DeclareFieldFormat{labelnumberwidth}{\color{primary}#1}%
+\fi
 % ------------  Citations ------------------------
 % Some optional citation commands
 \DeclareCiteCommand{\mciten} % only prints number and puts reference in margin
@@ -630,7 +644,11 @@
 \newbibmacro{sidecite}{%
   \printtext[sidecite]{%
      \raggedright%
-     \printtext[bibhyperref]{\textcolor{primary}{\printfield{labelnumber}}\:}
+     \if@supercite
+        \printtext[bibhyperref]{\textcolor{primary}{\printfield{labelnumber}}\:}
+     \else
+        \printtext[bibhyperref]{\textcolor{primary}{[\printfield{labelnumber}]}}
+     \fi   
      \textcolor{mediumgray}{%
 	    \printnames{labelname}%
 	    \unspace, %
@@ -641,8 +659,8 @@
 		\printfield{year}.%
 		\vspace{-0.75\baselineskip}%    % this command decreases the spacing between citations when they come in groups
 		}%
-     }%
-  \setunit{}}
+	}%
+\setunit{}}
 % ---------------------------------------
 
 % ---------- for testing ---------------

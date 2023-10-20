@@ -9,31 +9,54 @@
 
 \RequireCitationStyle{numeric-comp}
 
+\if@supercite
 \ExecuteBibliographyOptions
   {
     autocite  = superscript,
     autopunct = false,
     sorting   = none
   }
+\else
+\ExecuteBibliographyOptions
+  {
+    autopunct = false,
+    sorting   = none
+  }
+\fi
 
 \DeclareFieldFormat[article,inbook,report,techreport,
     inproceedings,patent,thesis,unpublished,suppbook,
     suppcollection,suppperiodical]{citetitle}{\usebibmacro{string+doiurlisbn}{\mkbibquote{#1}}}
 \DeclareFieldFormat[book,incollection]{citetitle}{\usebibmacro{string+doiurlisbn}{\mkbibemph{#1}}}
 
-\DeclareCiteCommand{\cbx@mcite}[\mkbibsuperscript]
+\if@supercite
+  \DeclareCiteCommand{\cbx@mcite}[\mkbibsuperscript]
   {\usebibmacro{cite:init}%
-  \let\multicitedelim=\supercitedelim
-  \iffieldundef{prenote}
-     {}
-     {\BibliographyWarning{Ignoring prenote argument}}%
-   \iffieldundef{postnote}
-     {}
-     {\BibliographyWarning{Ignoring postnote argument}}}
+    \let\multicitedelim=\supercitedelim
+    \iffieldundef{prenote}
+    {}
+    {\BibliographyWarning{Ignoring prenote argument}}%
+    \iffieldundef{postnote}
+    {}
+    {\BibliographyWarning{Ignoring postnote argument}}}
   {\usebibmacro{citeindex}%
    \usebibmacro{cite:comp}}
   {}
-  {\usebibmacro{cite:dump}}
+  {\usebibmacro{cite:dump}}  
+\else
+  \DeclareCiteCommand{\cbx@mcite}[\mkbibbrackets]
+  {\usebibmacro{cite:init}%
+     \iffieldundef{prenote}
+     {}
+     {\BibliographyWarning{Ignoring prenote argument}}%
+     \iffieldundef{postnote}
+     {}
+     {\BibliographyWarning{Ignoring postnote argument}}}
+  {\usebibmacro{citeindex}%
+  \usebibmacro{cite:comp}}
+  {}
+  {\usebibmacro{cite:dump}}     
+\fi
 
   \DeclareCiteCommand{\mcite}[\cbx@mcite@init\cbx@mcite]
   {\gdef\cbx@savedkeys{}%

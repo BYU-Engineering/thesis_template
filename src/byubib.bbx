@@ -10,20 +10,22 @@
 \RequireBibliographyStyle{numeric-comp}
 \DeclareNameAlias{default}{family-given}
 
-\defbibenvironment{bibliography}
-  {\list
-{\printfield[labelnumberwidth]{labelnumber}}
-{\setlength{\labelwidth}{\labelnumberwidth}%
- \setlength{\leftmargin}{0pt}%
- %\setlength{\itemindent}{-\leftmargin}%
- \setlength{\bibhang}{0pt}%
- \setlength{\labelsep}{0.75\labelwidth}%
- % \addtolength{\leftmargin}{\labelsep}%
- \setlength{\itemsep}{\bibitemsep}%
-\setlength{\parsep}{\bibparsep}}%
-    \renewcommand*{\makelabel}[1]{\hss##1}}
-{\endlist}
-{\item}
+\if@oneside
+  \defbibenvironment{bibliography}
+    {\list
+  {\printfield[labelnumberwidth]{labelnumber}}
+  {\setlength{\labelwidth}{\labelnumberwidth}%
+  \setlength{\leftmargin}{0pt}%
+  %\setlength{\itemindent}{-\leftmargin}%
+  \setlength{\bibhang}{0pt}%
+  \setlength{\labelsep}{0.75\labelwidth}%
+  % \addtolength{\leftmargin}{\labelsep}%
+  \setlength{\itemsep}{\bibitemsep}%
+  \setlength{\parsep}{\bibparsep}}%
+      \renewcommand*{\makelabel}[1]{\hss##1}}
+  {\endlist}
+  {\item}
+\fi
 
 % New options
 \newtoggle{bbx:articletitle}

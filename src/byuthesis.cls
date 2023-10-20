@@ -26,10 +26,11 @@
 % Citation options under the fancy format option: onlinecite or supercite 
 % (onlinecite is default)
 % Under the fancy format option, citations can either show up as numbers 
-% in brackets on the line of text (onlinecite) or superscripted above the 
-% text (supercite). With the onlinecite option, the reference list and 
-% the sidenote citation will show the reference number in brackets. With 
-% the supercite option brackets will not appear around the reference number.
+% in brackets on the line of text as in IEEE style (onlinecite) or superscripted 
+% above the text (supercite) as in AIAA style. With the onlinecite option, 
+% the reference list and the sidenote citation will show the reference number 
+% in brackets. With the supercite option brackets will not appear around the 
+% reference number.
 \newif\if@onlinecite
 \@onlinecitetrue
 \newif\if@supercite

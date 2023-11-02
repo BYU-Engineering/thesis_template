@@ -7,7 +7,7 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% -------- set user options for byuthesis class -----------
+% --------- set user options for byuthesis class ------------
 % Options are declared by user when specifying the document class such as in the template.tex file
 % For example, \documentclass[fancy,phd]{byuthesis}
 %.          or \documentclass[simple,masters]{byuthesis}

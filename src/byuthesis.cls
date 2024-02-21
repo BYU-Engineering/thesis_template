@@ -656,8 +656,9 @@
 		\printfield[citetitle]{labeltitle}%
 		\newunit
 		\usebibmacro{shortjournal}%
-		\unspace, %
-		\printfield{year}.%
+		\newunit %
+		\printfield{year}%
+		\addperiod
 		\vspace{-0.75\baselineskip}%    % this command decreases the spacing between citations when they come in groups
 		}%
 	}%

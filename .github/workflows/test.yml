@@ -14,8 +14,21 @@ jobs:
       - uses: actions/checkout@v4
       - name: Install dependencies
         run: sudo apt install $apt_packages
+      - name: Setup latexmk to run nomenclature
+        run: cp .github/.latexmkrc ~/.latexmkrc
       - name: Run test
         run: cd .github && make onesided
+      - name: Check PDF Page Count
+        run: |
+          expected_pages=26
+          actual_pages=$(pdfinfo src/template.pdf | grep Pages | awk '{print $2}')
+          if [ "$actual_pages" -ne "$expected_pages" ]; then
+            echo "Error: PDF does not have the expected number of pages (expected $expected_pages, got $actual_pages)."
+            exit 1
+          else
+            echo "PDF page count is correct (expected $expected_pages, got $actual_pages)."
+          fi
+  
 
   test-two-sided:
     runs-on: ubuntu-latest
@@ -23,5 +36,18 @@ jobs:
       - uses: actions/checkout@v4
       - name: Install dependencies
         run: sudo apt install $apt_packages
+      - name: Setup latexmk to run nomenclature
+        run: cp .github/.latexmkrc ~/.latexmkrc
       - name: Run test
         run: cd .github && make twosided
+      - name: Check PDF Page Count
+        run: |
+          expected_pages=40
+          actual_pages=$(pdfinfo src/template_twosided.pdf | grep Pages | awk '{print $2}')
+          if [ "$actual_pages" -ne "$expected_pages" ]; then
+            echo "Error: PDF does not have the expected number of pages (expected $expected_pages, got $actual_pages)."
+            exit 1
+          else
+            echo "PDF page count is correct (expected $expected_pages, got $actual_pages)."
+          fi
+  

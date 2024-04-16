@@ -6,6 +6,8 @@
 
 \ProvidesFile{aiaa.bbx}[2016/04/13 v1.0 biblatex bibliography style]
 
+\newbibmacro*{bbx:savehash}{\savefield{fullhash}{\bbx@lasthash}}
+
 % Load the standard style to avoid copy-pasting unnecessary material
 \RequireBibliographyStyle{numeric-comp}
 \DeclareNameAlias{default}{family-given}
@@ -16,10 +18,10 @@
   {\printfield[labelnumberwidth]{labelnumber}}
   {\setlength{\labelwidth}{\labelnumberwidth}%
   \setlength{\leftmargin}{0pt}%
-  %\setlength{\itemindent}{-\leftmargin}%
+%  \setlength{\itemindent}{-\leftmargin}%
   \setlength{\bibhang}{0pt}%
   \setlength{\labelsep}{0.75\labelwidth}%
-  % \addtolength{\leftmargin}{\labelsep}%
+%  \addtolength{\leftmargin}{\labelsep}%
   \setlength{\itemsep}{\bibitemsep}%
   \setlength{\parsep}{\bibparsep}}%
       \renewcommand*{\makelabel}[1]{\hss##1}}
@@ -83,7 +85,8 @@
           \href{https://patents.google.com/patent/US\thefield{number}/en}{#1}%
         }{#1}%
       }{% if only url is available
-        \href{https://\thefield{url}}{#1}%
+%        \href{https://\thefield{url}}{#1}%
+        \href{\thefield{url}}{#1}%
       }%
     }{% if only url or isbn is available
       \href{https://books.google.com/books?vid=ISBN\thefield{isbn}}{#1}%
@@ -105,13 +108,18 @@
 %\DeclareFieldFormat[online]{title}{\mkbibquote{#1\isdot}}
 \DeclareFieldFormat{url}{\bibstring{url}\addcolon\space\url{#1}}
 %\DeclareFieldFormat[misc]{title}{#1}
-\DeclareFieldFormat[article,inbook,incollection,book,
-     inproceedings,patent,thesis,unpublished,suppbook,
-     suppcollection,suppperiodical]{citetitle}{\mkbibemph{#1}}
+%\DeclareFieldFormat[article,inbook,incollection,book,
+%     inproceedings,patent,thesis,unpublished,suppbook,
+%     suppcollection,suppperiodical]{citetitle}{\mkbibemph{#1}}
 \DeclareFieldFormat[article,inbook,report,techreport,
-     inproceedings,patent,thesis,unpublished,suppbook,
+     inproceedings,patent,thesis,unpublished,suppbook,online,electronic,
      suppcollection,suppperiodical]{title}{\usebibmacro{string+doiurlisbn}{\mkbibquote{#1}}}
+\DeclareFieldFormat[article,inbook,report,techreport,
+     inproceedings,patent,thesis,unpublished,suppbook,online,electronic,
+     suppcollection,suppperiodical]{citetitle}{\usebibmacro{string+doiurlisbn}{\mkbibquote{#1}}}
 \DeclareFieldFormat[book,incollection]{title}{\usebibmacro{string+doiurlisbn}{\mkbibemph{#1}}}
+\DeclareFieldFormat[book,incollection]{citetitle}{\usebibmacro{string+doiurlisbn}{\mkbibemph{#1}}}
+
 %\DeclareFieldFormat
 %  [article,inbook,incollection,inproceedings,patent,thesis,
 %   unpublished,techreport,misc,book]
@@ -165,19 +173,24 @@
     backrefpages = {cited on pp.} % for multiple page numbers
 }
 
+
 \DeclareFieldFormat{pagerefformat}{{\footnotesize\color{mediumgray}#1}}
-\renewbibmacro*{pageref}{%
+\renewbibmacro*{pageref}{}%
+
+% This block of code aligns the "cited on..." text with the beginning (top)
+% of the bibliography entry.
+\renewbibmacro*{begentry}{%
   \iflistundef{pageref}
     {}
-    {\refnote{%\footnotesize%\color{gray}%{%
-    \printtext[pagerefformat]{%
-         \ifnumgreater{\value{pageref}}{1}%
-             {\bibstring{backrefpages}\ppspace}%
-             {\bibstring{backrefpage}\ppspace}%
-         \printlist[pageref][-\value{listtotal}]{pageref}%
-         }%
-       }}%
-    }
+    {\refnote{%
+    	\printtext[pagerefformat]{%
+        \ifnumgreater{\value{pageref}}{1}%
+            {\bibstring{backrefpages}\ppspace}%
+            {\bibstring{backrefpage}\ppspace}%
+            \printlist[pageref][-\value{listtotal}]{pageref}}%
+         }%        
+    \blx@initunit}%
+  }
 
 \DeclareFieldFormat{urldate}{\bibstring{urlseen}\space#1}
 
@@ -187,45 +200,32 @@
 %   september = Sep\adddot ,
 % }
 
-% % Support for dashed author name replacement
-% \InitializeBibliographyStyle{\global\undef\bbx@lasthash}
-%
-% \newbibmacro*{bbx:savehash}{\savefield{fullhash}{\bbx@lasthash}}
+% Support for dashed author name replacement
+\InitializeBibliographyStyle{\global\undef\bbx@lasthash}
+
 
 % Bibliography macros
-% \renewbibmacro*{author}{%
-%   \ifboolexpr{
-%     test \ifuseauthor
-%     and
-%     not test {\ifnameundef{author}}
-%   }
-%     {%
-%       \iffieldequals{fullhash}{\bbx@lasthash}
-%         {\bibnamedash\addcomma\space}
-%         {\printnames{author}}%
-%       \usebibmacro{bbx:savehash}%
-%       \iffieldundef{authortype}
-%         {}
-%         {%
-%           \setunit{\addcomma\space}%
-%           \usebibmacro{authorstrg}%
-%         }%
-%     }
-%     {\global\undef\bbx@lasthash}%
-% }
-
-\renewbibmacro*{bybookauthor}{%
-  \ifnamesequal{author}{bookauthor}
-    {}
+\renewbibmacro*{author}{%
+  \ifboolexpr{
+    test \ifuseauthor
+    and
+    not test {\ifnameundef{author}}
+  }
     {%
-      \iffieldundef{bookauthor}
+      \iffieldequals{fullhash}{\bbx@lasthash}
+        {\bibnamedash\addcomma\space}
+        {\printnames{author}}%
+      \usebibmacro{bbx:savehash}%
+      \iffieldundef{authortype}
         {}
         {%
-          \printnames{bookauthor}%
-          \newunit
-       }%
-    }%
+          \setunit{\addcomma\space}%
+          \usebibmacro{authorstrg}%
+        }%
+    }
+    {\global\undef\bbx@lasthash}%
 }
+
 
 \renewbibmacro*{byeditor+others}{%
   \ifnameundef{editor}
@@ -903,8 +903,7 @@
   \usebibmacro{pageref}%
   \usebibmacro{author/editor+others/translator+others}%
   \newunit
-%  \usebibmacro{maintitle+title}%			%%%% Uses case specified in .bibfile in online titles
-  \usebibmacro{title}%						%%%% Forces sentence case in online titles
+  \usebibmacro{maintitle+title}%	
   \newunit
   \printlist{language}%
   \newunit\newblock
@@ -921,7 +920,7 @@
   \iftoggle{bbx:eprint}
     {\usebibmacro{eprint}}
     {}%
-  %\setunit{\adddot\addspace}%
+  \setunit{\adddot\addspace}%
   \usebibmacro{addendum+pubstate}%
   % \setunit{\bibpagerefpunct}\newblock
   % \usebibmacro{pageref}%

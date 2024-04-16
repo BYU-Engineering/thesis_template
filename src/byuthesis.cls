@@ -651,12 +651,13 @@
         \printtext[bibhyperref]{\textcolor{primary}{[\printfield{labelnumber}]}}
      \fi   
      \textcolor{mediumgray}{%
-     	\printnames{labelname}%
-     	\setunit*{\addcomma\space}%
-     	\printfield[citetitle]{labeltitle}%
-     	\setunit*{\addcomma\space}%
-     	\printfield{year}.%
-     	\newunit
+	    \printnames{labelname}%
+	    \unspace, %
+		\printfield[citetitle]{labeltitle}%
+		\newunit
+		\usebibmacro{shortjournal}%
+		\unspace, %
+		\printfield{year}.%
 		\vspace{-0.75\baselineskip}%    % this command decreases the spacing between citations when they come in groups
 		}%
 	}%

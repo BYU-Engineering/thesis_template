@@ -322,6 +322,7 @@
 % ---------------------------------------
 
 % ---------- cross referencing ------------
+\RequirePackage{marginnote}
 \RequirePackage[capitalise]{cleveref}
 % ---------------------------------------
 
@@ -555,7 +556,7 @@
 % ------------- reference margin notes for backreferencing ---------------
 % used by byubib.bbx
 \newcounter{rnote}
-\newcommand\refnote[1]{\stepcounter{rnote}\marginpar{\MakeLowercase{#1}}}
+\newcommand\refnote[1]{\stepcounter{rnote}\marginnote{\MakeLowercase{#1}}}
 
 % ---------------------------------------
 
@@ -656,8 +657,9 @@
 		\printfield[citetitle]{labeltitle}%
 		\newunit
 		\usebibmacro{shortjournal}%
-		\unspace, %
-		\printfield{year}.%
+		\newunit %
+		\printfield{year}%
+		\addperiod
 		\vspace{-0.75\baselineskip}%    % this command decreases the spacing between citations when they come in groups
 		}%
 	}%

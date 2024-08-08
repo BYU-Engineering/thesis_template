@@ -80,7 +80,7 @@
 \RequirePackage[T1]{fontenc}
 
 %%%% Serif fonts for body text
-% newpxtext uses palatino for body text while newpxmath uses palatino form math mode for a consistent look
+% newpxtext uses palatino for body text while newpxmath uses palatino for math mode for a consistent look
 \RequirePackage{newpxtext,newpxmath}
 
 %% This font is not part of the standard LaTeX package and requires installation on your computer
@@ -388,7 +388,7 @@
 		\setlrmarginsandblock{1.75in}{1.75in}{*}
 		\checkandfixthelayout
 	\fi
-	\pdfbookmark{BYU TITLE PAGE}{titlepage}
+	\pdfbookmark{TITLE PAGE}{titlepage}
 	\pagestyle{empty}
 	\begin{Spacing}{2.0}
 		\begin{center}
@@ -430,10 +430,10 @@
 % This title page follows immediately after the title page required by BYU Grad Studies.
 % This title page can be customized as the student desires, but should include the title,
 % student name, department, degree, and the BYU Engineering logo.
-%
+% This custom title page is OPTIONAL
 
 \newcommand{\customtitlepage}{%
-	\pdfbookmark{TITLE PAGE}{customtitlepage}
+	\pdfbookmark{CUSTOM TITLE PAGE}{customtitlepage}
 	\pagestyle{empty}
 	\begin{Spacing}{2.2}
 		\vspace*{116pt}

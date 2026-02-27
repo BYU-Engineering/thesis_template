@@ -656,9 +656,9 @@
      	\setunit*{\addcomma\space}%
      	\printfield[citetitle]{labeltitle}%
      	\setunit*{\addcomma\space}%
-     	\printfield{year}.%
+     	\printfield{year}%
      	\newunit
-%		\addperiod
+		\addperiod
 		\vspace{-0.75\baselineskip}%    % this command decreases the spacing between citations when they come in groups
 		}%
 	}%

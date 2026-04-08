@@ -388,7 +388,7 @@
 		\setlrmarginsandblock{1.75in}{1.75in}{*}
 		\checkandfixthelayout
 	\fi
-	\pdfbookmark{TITLE PAGE}{titlepage}
+	\pdfbookmark{Title Page}{titlepage}
 	\pagestyle{empty}
 	\begin{Spacing}{2.0}
 		\begin{center}
@@ -433,7 +433,7 @@
 % This custom title page is OPTIONAL
 
 \newcommand{\customtitlepage}{%
-	\pdfbookmark{CUSTOM TITLE PAGE}{customtitlepage}
+	\pdfbookmark{Custom Title Page}{customtitlepage}
 	\pagestyle{empty}
 	\begin{Spacing}{2.2}
 		\vspace*{116pt}
@@ -458,7 +458,7 @@
 % ------------ abstract ------------------
 \renewenvironment{abstract}{%
 	\clearpage
-	\pdfbookmark[0]{ABSTRACT}{abstract}
+	\pdfbookmark[0]{Abstract}{abstract}
 	\setlength{\parskip}{\baselineskip}
 	\vspace*{35pt}	% spacing set to match chapter header spacing
 	\begin{flushleft}
@@ -483,7 +483,7 @@
 % ---------- acknowledgments ------------
 \newenvironment{acknowledgments}{%
 	\clearpage
-	\pdfbookmark[0]{ACKNOWLEDGMENTS}{acknowledgments}
+	\pdfbookmark[0]{Acknowledgments}{acknowledgments}
 	\setlength{\parskip}{\baselineskip}
 	\vspace*{35pt}	% spacing set to match chapter header spacing
 	\begin{flushleft}

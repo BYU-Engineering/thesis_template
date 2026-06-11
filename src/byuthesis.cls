@@ -286,9 +286,9 @@
 	% Place page number in top outer corner of all pages except chapter title pages
 	% Place chapter title in top inner corner of all pages except chapter title pages
 	\makeoddhead{byu}%
-	    {\normalfont\small\slshape\leftmark}{}{\normalfont\small\slshape\thepage}
+	    {}{}{\normalfont\small\slshape\thepage}
 	\makeevenhead{byu}%
-	    {\normalfont\small\slshape\thepage}{}{\normalfont\small\slshape\leftmark}
+	    {\normalfont\small\slshape\thepage}{}{}
 	\makeoddfoot{byu}%
 	    {}{}{}
 	\makeevenfoot{byu}%
@@ -298,8 +298,8 @@
 	% Place page number in top right corner of all pages except chapter title pages
 	% Place chapter title in top left corner of all pages except chapter title pages
 	\makeoddhead{byu}%
-		{\normalfont\small\slshape\leftmark}{}{\normalfont\small\slshape\thepage}	% include chapter title
-	%    {}{}{\normalfont\small\slshape\thepage}	% don't include chapter title
+	%	{\normalfont\small\slshape\leftmark}{}{\normalfont\small\slshape\thepage}	% include chapter title
+		{}{}{\normalfont\small\slshape\thepage}	% don't include chapter title
 	\makeoddfoot{byu}%
 	    {}{}{}
 \fi

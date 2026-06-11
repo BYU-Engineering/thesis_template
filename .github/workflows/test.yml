@@ -14,7 +14,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Install dependencies
-        run: sudo apt install $apt_packages
+        run: |
+          sudo apt-get update
+          sudo apt install $apt_packages
       - name: Setup latexmk to run nomenclature
         run: cp .github/.latexmkrc ~/.latexmkrc
       - name: Run test
@@ -36,7 +38,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Install dependencies
-        run: sudo apt install $apt_packages
+        run: |
+          sudo apt-get update
+          sudo apt install $apt_packages
       - name: Setup latexmk to run nomenclature
         run: cp .github/.latexmkrc ~/.latexmkrc
       - name: Run test

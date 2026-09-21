@@ -1,0 +1,116 @@
+% Print-oriented layout overrides for the bound/printed copy.
+% Loaded from template.tex only when \byuprintbuild is defined, i.e. when
+% building template-for-printing.tex. Content, packages, and all portrait
+% layout are shared with the submission source, so the printed copy cannot
+% drift from the ETD version.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Preflight-safe figure overrides                                       %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% A file at print/<path> shadows <path> for this build only. \graphicspath
+% cannot do this: figure references in the chapters are directory-qualified
+% (figures/foo.pdf), and LaTeX resolves those relative to the source directory
+% before it ever consults the graphics path. So rewrite the path instead.
+%
+% Used for the matplotlib plots, whose Type 3 text some print-shop preflight
+% profiles report as unembedded Arial; the copies in print/figures/ have that
+% text converted to outlines. See print/README.md.
+\makeatletter
+\let\byu@origincludegraphics\includegraphics
+\renewcommand{\includegraphics}[2][]{%
+  \IfFileExists{print/#2}%
+    {\byu@origincludegraphics[#1]{print/#2}}%
+    {\byu@origincludegraphics[#1]{#2}}%
+}
+\makeatother
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Every page stays portrait                                             %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Neutralize pdflscape (and with it the landscape page-number hook from
+% template.tex). Wide material is rotated inside a portrait page instead,
+% so the bound copy is read by turning the book rather than the page.
+\renewenvironment{landscape}{}{}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% UDS table sizing on portrait pages                                    %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setlength{\udscatwidth}{2.25cm}
+\renewcommand{\udsbenefitstablesize}{\footnotesize}
+\renewcommand{\udscomparisontablesize}{\footnotesize}
+\renewcommand{\udsevaluationtablesize}{\scriptsize}
+% Upright tables (4.1, 5.1): height limited by the text block, minus caption.
+\renewcommand{\udstablemaxheight}{\dimexpr\textheight-6\baselineskip\relax}
+\renewcommand{\udsbenefitsmaxheight}{\dimexpr\textheight-6\baselineskip\relax}
+% Table 4.2 is rotated, so its height runs along the text width.
+\renewcommand{\udscomparisontablemaxheight}{\dimexpr\textwidth-4\baselineskip\relax}
+
+% Wide tables get their own portrait page (caption above, BYU convention).
+\renewenvironment{udstable}[1][p]{%
+  \begin{table}[#1]%
+  \setlength{\udstablewidth}{\textwidth}%
+  \centering
+}{%
+  \end{table}%
+}
+
+% Table 4.2 is too wide to stay legible in portrait: rotate the whole float.
+\renewenvironment{udscomparisontable}[1][p]{%
+  \begin{sidewaystable}[#1]%
+  \setlength{\udstablewidth}{\linewidth}%
+  \centering
+}{%
+  \end{sidewaystable}%
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Full-page wide figures, rotated on a portrait page                    %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newlength{\printfigwidth}
+\newlength{\printfigheight}
+
+% Shared layout: rotated figure + caption kept together on one portrait page.
+% Optional size: large (Fig. 5.1) or slight (Figs. 7.1-7.3, appendix diagrams).
+\newcommand{\printrotatedfigurelayout}[5][slight]{%
+    \def\printfigopt{#1}%
+    \def\printfiglarge{large}%
+    \ifx\printfigopt\printfiglarge
+        \setlength{\printfigwidth}{\dimexpr\textheight-0.8in\relax}%
+        \setlength{\printfigheight}{0.98\textwidth}%
+    \else
+        \setlength{\printfigwidth}{\dimexpr\textheight-1.05in\relax}%
+        \setlength{\printfigheight}{0.96\textwidth}%
+    \fi
+    \par\vspace{0.25em}%
+    \noindent\begin{minipage}{\textwidth}
+        \centering
+        \rotatebox{90}{%
+            \includegraphics[%
+                width=\printfigwidth,%
+                height=\printfigheight,%
+                keepaspectratio]{#2}%
+        }%
+        \par\vspace{0.2em}%
+        \captionof{figure}[#3]{#4}%
+        \label{#5}%
+    \end{minipage}%
+    \par\vspace{0.25em}%
+}
+
+% Usage: \landscapefigurepage[large|slight]{image}{LOF caption}{caption}{label}
+\renewcommand{\landscapefigurepage}[5][slight]{%
+    \printrotatedfigurelayout[#1]{#2}{#3}{#4}{#5}%
+}
+
+% Appendix diagram: section title + rotated figure on one portrait page.
+% Usage: \landscapeappendixdiagram[height]{title}{sec label}{image}{LOF caption}{caption}{label}
+\renewcommand{\landscapeappendixdiagram}[7][0.74\textheight]{%
+    \section{#2}%
+    \label{#3}%
+    \printrotatedfigurelayout[slight]{#4}{#5}{#6}{#7}%
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Metadata                                                              %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\hypersetup{pdftitle={Toward Passwordless Document Encryption (print)}}

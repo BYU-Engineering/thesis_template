@@ -290,6 +290,13 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%
 % --- Begin Document --- %
 %%%%%%%%%%%%%%%%%%%%%%%%%%
+% Print build only: layout overrides for the bound/printed copy.
+% template-for-printing.tex defines \byuprintbuild and then inputs this file,
+% so the printed version always tracks this source. No effect on the ETD PDF.
+\ifdefined\byuprintbuild
+    \input{print-overrides}
+\fi
+
 \begin{document}
 
 

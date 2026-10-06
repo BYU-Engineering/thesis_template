@@ -387,6 +387,9 @@
 	\if@fancy
 		\setlrmarginsandblock{1.75in}{1.75in}{*}
 		\checkandfixthelayout
+		% \checkandfixthelayout does not update the line width used by the center environment
+		% once we are inside the document, so refresh it to the new text width
+		\setlength{\columnwidth}{\textwidth}\setlength{\hsize}{\textwidth}\setlength{\linewidth}{\textwidth}
 	\fi
 	\pdfbookmark{Title Page}{titlepage}
 	\pagestyle{empty}
@@ -421,6 +424,7 @@
 	\if@fancy
 		\setlrmarginsandblock{1.0in}{2.75in}{*}
 		\checkandfixthelayout
+		\setlength{\columnwidth}{\textwidth}\setlength{\hsize}{\textwidth}\setlength{\linewidth}{\textwidth}
 		\setmarginnotes{0.125in}{2.0in}{\onelineskip}
 	\fi
 }
